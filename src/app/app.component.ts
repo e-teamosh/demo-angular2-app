@@ -13,6 +13,7 @@ import { PlanetsService } from './shared/planets.service'
 export class AppComponent implements OnInit {
 
   planetsList: Planets[] = [];
+  selectedPlanet: Planets;
 
   constructor(
     private _planetsService: PlanetsService) {}
@@ -20,6 +21,11 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this._planetsService.getPlanets()
       .then(planets => this.planetsList = planets);
+    this.selectedPlanet = new Planets();
+  }
+
+  showPlanetInfo(selPlanet): void {
+    this.selectedPlanet = selPlanet;
   }
 
 }
