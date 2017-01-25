@@ -2,21 +2,20 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import { Planets } from './shared/planets.model';
-import { PlanetsService } from './shared/planets.service'
+import { Planets } from './common/planets.model';
+import { PlanetsService } from './common/planets.service'
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  moduleId: module.id,
+  selector: 'app',
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
-
   planetsList: Planets[] = [];
   selectedPlanet: Planets;
 
-  constructor(
-    private _planetsService: PlanetsService) {}
+  constructor(private _planetsService: PlanetsService) {}
 
   ngOnInit(): void {
     this._planetsService.getPlanets()
