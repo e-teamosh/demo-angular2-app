@@ -19,3 +19,4 @@ import 'core-js/es7/reflect';
 import 'zone.js/dist/zone';
 
 import 'hammerjs'; //need to Angular Material
+import 'lodash'; //need to Angular Material

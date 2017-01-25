@@ -1,5 +1,6 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
+import {UsersService} from "../../../commons/services";
 
 @Component({
   selector: 'login',
@@ -10,12 +11,20 @@ export class LoginComponent {
   private username: string = '';
   private password: string = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private usersService: UsersService
+  ) {}
 
   login(event: Event): void {
     event.preventDefault();
     console.log("Username: ", this.username);
     console.log("Password: ", this.password);
-    this.router.navigate(['/home']);
+    if (this.usersService.checkUser(this.username, this.password)) {
+      this.router.navigate(['/home']);
+    } else {
+      console.log("Login error. Type userName is: test, and password is: 1qaz2wsx");
+    }
+
   }
 }

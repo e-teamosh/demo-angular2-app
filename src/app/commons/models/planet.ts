@@ -1,4 +1,4 @@
-export class Planets {
+export class Planet {
   position: number;
   name: string;
   distanceFromSun: number;

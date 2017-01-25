@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Planets} from '../models/planets';
+import {Planet} from '../models';
 
 @Injectable()
 export class PlanetsService {
@@ -7,12 +7,12 @@ export class PlanetsService {
   constructor() {
   }
 
-  getPlanets(): Promise<Planets[]> {
+  getPlanets(): Promise<Planet[]> {
     return Promise.resolve(PLANETSDATA);
   }
 }
 
-const PLANETSDATA: Planets[] = [
+const PLANETSDATA: Planet[] = [
   {position: 1, name: 'Mercury', distanceFromSun: 58, description: '88 earth days to orbit the sun'},
   {position: 2, name: 'Venus', distanceFromSun: 108, description: '225 earth days to orbit the sun'},
   {position: 3, name: 'Earth', distanceFromSun: 150, description: '365 earth days to orbit the sun'},

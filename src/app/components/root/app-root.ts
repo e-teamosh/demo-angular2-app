@@ -1,4 +1,6 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
+import {UsersService} from "../../commons/services/users";
+import {User} from "../../commons/models/user";
 
 @Component({
   moduleId: module.id,
@@ -6,4 +8,15 @@ import {Component} from "@angular/core";
   templateUrl: 'app-root.html',
   styleUrls: ['app-root.scss']
 })
-export class AppRootComponent {}
+export class AppRootComponent implements OnInit {
+  private loggedUser: User;
+
+  constructor(
+    private usersService: UsersService
+  ) {}
+
+  ngOnInit(): void {
+    this.loggedUser = this.usersService.getLoggedUser();
+  }
+
+}

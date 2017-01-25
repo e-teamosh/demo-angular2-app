@@ -7,6 +7,7 @@ import {RouterModule} from "@angular/router";
 import {LoginComponent} from "./components/login";
 import {SignupComponent} from "./components/signup";
 import {authRoutes} from "./auth.routes";
+import {UsersService} from "../commons/services";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {authRoutes} from "./auth.routes";
     RouterModule.forRoot(authRoutes, {
       useHash: true
     })
-  ]
+  ],
+  providers: [UsersService]
 })
 export class AuthModule {
 }
