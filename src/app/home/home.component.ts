@@ -1,9 +1,16 @@
 import {Component} from "@angular/core";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'home',
-  template: '<h1>Home</h1>'
+  templateUrl: './home.component.html'
 })
 export class HomeComponent {
+  constructor(private router: Router) {}
+
+  logout(): void {
+    this.router.navigate(['./login']);
+    console.log("Logout");
+  }
 
 }

@@ -1,0 +1,17 @@
+<div class="login jumbotron center-block">
+  <h1>Login</h1>
+  <form role="form" (submit)="login($event)">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input id="username" type="text" name="username" [(ngModel)]="username" [ngModelOptions]="{standalone: true}"
+             class="form-control" placeholder="Username">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input id="password" type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"
+             class="form-control" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-default">Login</button>
+    <a [routerLink]="['/signup']">Click here to Signup</a>
+  </form>
+</div>
