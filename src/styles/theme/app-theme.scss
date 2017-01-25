@@ -1,7 +1,7 @@
 @import '~@angular/material/core/theming/all-theme';
 @include md-core();
-$app-primary: md-palette($md-indigo);
+$app-primary: md-palette($md-indigo, A400, A200, A700);
 $app-accent:  md-palette($md-pink, A200, A100, A400);
-$app-warn:    md-palette($md-red);
+$app-warn:    md-palette($md-red, A400, A100, A700);
 $app-theme: md-light-theme($app-primary, $app-accent, $app-warn);
 @include angular-material-theme($app-theme);

@@ -3,25 +3,22 @@ import {NgModule} from '@angular/core';
 import {MaterialModule} from '@angular/material';
 import {RouterModule} from "@angular/router";
 
-import {AppRootComponent} from './components/root';
-import {appRoutes} from "./app.routes";
-import {AuthModule} from "./Auth";
-import {HomeModule} from "./Home";
+import {HomeComponent} from './components/home';
+import {PlanetsService} from '../common/planets.service';
+import {homeRoutes} from "./home.routes";
 
 @NgModule({
   declarations: [
-    AppRootComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     MaterialModule.forRoot(),
-    RouterModule.forRoot(appRoutes, {
+    RouterModule.forRoot(homeRoutes, {
       useHash: true
-    }),
-    AuthModule,
-    HomeModule
+    })
   ],
-  bootstrap: [AppRootComponent]
+  providers: [PlanetsService]
 })
-export class AppModule {
+export class HomeModule {
 }

@@ -1,13 +1,13 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 
-import {Planets} from "../common/planets.model";
-import {PlanetsService} from "../common/planets.service";
+import {Planets} from "../../../common/planets.model";
+import {PlanetsService} from "../../../common/planets.service";
 
 @Component({
   selector: 'home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  templateUrl: 'home.html',
+  styleUrls: ['home.scss']
 })
 export class HomeComponent implements OnInit {
   planetsList: Planets[] = [];
