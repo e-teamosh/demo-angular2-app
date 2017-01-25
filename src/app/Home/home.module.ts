@@ -4,7 +4,7 @@ import {MaterialModule} from '@angular/material';
 import {RouterModule} from "@angular/router";
 
 import {HomeComponent} from './components/home';
-import {PlanetsService} from '../common/planets.service';
+import {PlanetsService} from '../commons/services';
 import {homeRoutes} from "./home.routes";
 
 @NgModule({

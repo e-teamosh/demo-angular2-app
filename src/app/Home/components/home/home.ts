@@ -1,8 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 
-import {Planets} from "../../../common/planets.model";
-import {PlanetsService} from "../../../common/planets.service";
+import {Planets} from "../../../commons/models";
+import {PlanetsService} from "../../../commons/services";
 
 @Component({
   selector: 'home',
