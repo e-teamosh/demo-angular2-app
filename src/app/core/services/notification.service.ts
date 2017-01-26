@@ -9,7 +9,7 @@ export class NotificationService {
     private mdSnackBar: MdSnackBar
   ) {
     this.config = new MdSnackBarConfig();
-    this.config.duration = 2000;
+    this.config.duration = 2500;
   }
 
   showError(error: Error): void {
