@@ -8,7 +8,6 @@ import {LoginComponent} from "./login/login.component";
 import {SignupComponent} from "./signup/signup.component";
 import {AuthService} from "./services/auth.service";
 
-
 @NgModule({
   declarations: [
     LoginComponent,
