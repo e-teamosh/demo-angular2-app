@@ -7,19 +7,19 @@ export class User {
     this.setPassword(password);
   }
 
-  public setUserName(userName: string): void {
+  setUserName(userName: string): void {
     this.userName = userName;
   }
 
-  public getUserName(): string {
+  getUserName(): string {
     return this.userName;
   }
 
-  public setPassword(password: string): void {
+  setPassword(password: string): void {
     this.password = password;
   }
 
-  public getPassword(): string {
+  getPassword(): string {
     return this.password;
   }
 }

@@ -1,8 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-import {Planet} from "../commons/models/planet.model";
-import {PlanetsService} from "../commons/services/planets.service";
-import {UsersService} from "../commons/services/users.service";
+
+import {Planet} from "../common/models/planet.model";
+import {PlanetsService} from "../common/services/planets.service";
+import {UsersService} from "../common/services/users.service";
 
 @Component({
   moduleId: module.id,

@@ -1,10 +1,11 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import {MaterialModule} from '@angular/material';
 import {RouterModule} from "@angular/router";
 
-import {HomeComponent} from './home.component';
 import {homeRoutes} from "./home.routes";
+import {HomeComponent} from './home.component';
+
 
 @NgModule({
   declarations: [
