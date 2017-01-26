@@ -1,14 +1,14 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-
-import {Planet} from "../../../commons/models";
-import {PlanetsService} from "../../../commons/services";
-import {UsersService} from "../../../commons/services/users";
+import {Planet} from "../commons/models/planet.model";
+import {PlanetsService} from "../commons/services/planets.service";
+import {UsersService} from "../commons/services/users.service";
 
 @Component({
-  selector: 'home',
-  templateUrl: 'home.html',
-  styleUrls: ['home.scss']
+  moduleId: module.id,
+  selector: 'wf-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   planetsList: Planet[] = [];
@@ -16,7 +16,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router,
               private planetsService: PlanetsService,
-              private usersService: UsersService) {}
+              private usersService: UsersService) {
+  }
 
   ngOnInit(): void {
     this.planetsService.getPlanets()

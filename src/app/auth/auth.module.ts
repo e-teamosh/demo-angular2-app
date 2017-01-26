@@ -4,10 +4,9 @@ import {FormsModule} from "@angular/forms";
 import {MaterialModule} from "@angular/material";
 import {RouterModule} from "@angular/router";
 
-import {LoginComponent} from "./components/login";
-import {SignupComponent} from "./components/signup";
+import {LoginComponent} from "./login/login.component";
+import {SignupComponent} from "./signup/signup.component";
 import {authRoutes} from "./auth.routes";
-import {UsersService} from "../commons/services";
 
 @NgModule({
   declarations: [
@@ -22,7 +21,12 @@ import {UsersService} from "../commons/services";
       useHash: true
     })
   ],
-  providers: [UsersService]
+  providers: [],
+  exports: [
+    LoginComponent,
+    SignupComponent
+  ],
+  entryComponents: [LoginComponent]
 })
 export class AuthModule {
 }

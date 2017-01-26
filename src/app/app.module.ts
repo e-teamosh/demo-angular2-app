@@ -3,10 +3,11 @@ import {NgModule} from '@angular/core';
 import {MaterialModule} from '@angular/material';
 import {RouterModule} from "@angular/router";
 
-import {AppRootComponent} from './components/root';
+import {AppRootComponent} from './root/app-root.component';
 import {appRoutes} from "./app.routes";
-import {AuthModule} from "./Auth";
-import {HomeModule} from "./Home";
+import {AuthModule} from "./auth/auth.module";
+import {HomeModule} from "./home/home.module";
+import {CommonModule} from "./commons/common.module"
 
 @NgModule({
   declarations: [
@@ -19,8 +20,11 @@ import {HomeModule} from "./Home";
       useHash: true
     }),
     AuthModule,
-    HomeModule
+    HomeModule,
+    CommonModule
   ],
+  exports: [AppRootComponent],
+  entryComponents: [AppRootComponent],
   bootstrap: [AppRootComponent]
 })
 export class AppModule {

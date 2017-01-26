@@ -2,9 +2,10 @@ import {Component} from "@angular/core";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'signup',
-  templateUrl: 'signup.html',
-  styleUrls: ['signup.scss']
+  moduleId: module.id,
+  selector: 'wf-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent {
   private username: string = '';

@@ -3,8 +3,7 @@ import {NgModule} from '@angular/core';
 import {MaterialModule} from '@angular/material';
 import {RouterModule} from "@angular/router";
 
-import {HomeComponent} from './components/home';
-import {PlanetsService} from '../commons/services';
+import {HomeComponent} from './home.component';
 import {homeRoutes} from "./home.routes";
 
 @NgModule({
@@ -18,7 +17,9 @@ import {homeRoutes} from "./home.routes";
       useHash: true
     })
   ],
-  providers: [PlanetsService]
+  providers: [],
+  exports: [HomeComponent],
+  entryComponents: [HomeComponent]
 })
 export class HomeModule {
 }

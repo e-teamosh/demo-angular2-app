@@ -1,11 +1,12 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
-import {UsersService} from "../../../commons/services";
+import {UsersService} from "../../commons/services/users.service";
 
 @Component({
-  selector: 'login',
-  templateUrl: 'login.html',
-  styleUrls: ['login.scss']
+  moduleId: module.id,
+  selector: 'wf-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   private username: string = '';

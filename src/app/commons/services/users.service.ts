@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import * as _ from "lodash";
 
-import {User} from '../models';
+import {User} from '../models/user.model';
 import {USERS} from '../data/users';
 
 @Injectable()
