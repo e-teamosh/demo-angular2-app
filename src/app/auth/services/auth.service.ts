@@ -19,7 +19,8 @@ export class AuthService {
       this.usersService.setLoggedUser(user);
       return Promise.resolve(user);
     } else {
-      return Promise.reject("User not found.")
+      console.log('Login failed. UserName is: "test", password is: "1qaz2wsx"');
+      return Promise.reject(new Error('Login failed. Incorrect user name or password.'));
     }
   }
 
