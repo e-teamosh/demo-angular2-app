@@ -1,41 +1,34 @@
-import {Injectable} from '@angular/core';
-import * as _ from "lodash";
-
-import {User} from '../models/user.model';
-import {USERS} from '../data/users';
+import {Injectable} from "@angular/core";
+import {constants} from "../constants";
+import {LoggedUser} from "../models/logged-user.model";
+import {User} from "../models/user.model";
+import {StorageService} from "../../core/services/storage.service";
 
 @Injectable()
 export class UsersService {
-  private users: User[] = USERS;
-  private loggedUser: User = new User('', '');
+  private loggedUser: LoggedUser;
 
-  getLoggedUser(): User {
+  constructor(private storage: StorageService) {
+    this.loggedUser = new LoggedUser();
+  }
+
+  setLoggedUser(user: User): void {
+    this.loggedUser.setUserName(user.getUserName());
+    this.storage.setKey(constants.storageKey.loggedUser, this.loggedUser);
+  }
+
+  getLoggedUser(): LoggedUser {
+    let result = this.storage.getKey(constants.storageKey.loggedUser);
+    if (result instanceof Object) {
+      this.loggedUser.setUserName(result.userName);
+    }
     return this.loggedUser;
   }
 
   clearLoggedUser(): void {
-    this.loggedUser.setUserName('');
-    this.loggedUser.setPassword('');
+    this.loggedUser.clear();
+    this.storage.deleteKey(constants.storageKey.loggedUser);
   }
-
-  addUser(newUser: User): void {
-    this.users.push(newUser);
-  }
-
-  getUsers(): Promise<User[]> {
-    return Promise.resolve(this.users);
-  }
-
-  checkUser(userName: string, password: string): boolean {
-    let result: boolean = false;
-    if(_.find(this.users, user => user.getUserName() === userName && user.getPassword() === password)) {
-      result = true;
-      this.loggedUser.setUserName(userName);
-      this.loggedUser.setPassword(password);
-    }
-    return result;
-  }
-
 
 }
 

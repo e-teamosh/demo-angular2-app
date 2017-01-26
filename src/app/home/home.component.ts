@@ -1,9 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-
 import {Planet} from "../common/models/planet.model";
+import {AuthService} from "../auth/services/auth.service";
 import {PlanetsService} from "../common/services/planets.service";
-import {UsersService} from "../common/services/users.service";
 
 @Component({
   moduleId: module.id,
@@ -17,7 +16,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router,
               private planetsService: PlanetsService,
-              private usersService: UsersService) {
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -27,7 +26,7 @@ export class HomeComponent implements OnInit {
   }
 
   logout(): void {
-    this.usersService.clearLoggedUser();
+    this.authService.logout();
     this.router.navigate(['./login']);
     console.log("Logout");
   }

@@ -1,10 +1,9 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {MaterialModule} from '@angular/material';
+import {NgModule} from "@angular/core";
+import {BrowserModule} from "@angular/platform-browser";
+import {MaterialModule} from "@angular/material";
 import {RouterModule} from "@angular/router";
-
 import {homeRoutes} from "./home.routes";
-import {HomeComponent} from './home.component';
+import {HomeComponent} from "./home.component";
 
 
 @NgModule({

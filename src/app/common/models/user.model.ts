@@ -1,6 +1,9 @@
-export class User {
-  private userName: string;
-  private password: string;
+import {UserBasic} from "../interfaces/user-basic.interface";
+import {UserPassword} from "../interfaces/user-password.interface";
+
+export class User implements UserBasic, UserPassword {
+  userName: string;
+  password: string;
 
   constructor(userName: string, password: string) {
     this.setUserName(userName);

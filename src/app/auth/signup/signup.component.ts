@@ -11,7 +11,8 @@ export class SignupComponent {
   private username: string = '';
   private password: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }
 
   signup(event: Event): void {
     event.preventDefault();

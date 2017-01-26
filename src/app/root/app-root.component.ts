@@ -1,6 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-
-import {User} from "../common/models/user.model";
+import {LoggedUser} from "../common/models/logged-user.model";
 import {UsersService} from "../common/services/users.service";
 
 @Component({
@@ -10,11 +9,10 @@ import {UsersService} from "../common/services/users.service";
   styleUrls: ['./app-root.component.scss']
 })
 export class AppRootComponent implements OnInit {
-  private loggedUser: User;
+  loggedUser: LoggedUser;
 
-  constructor(
-    private usersService: UsersService
-  ) {}
+  constructor(private usersService: UsersService) {
+  }
 
   ngOnInit(): void {
     this.loggedUser = this.usersService.getLoggedUser();

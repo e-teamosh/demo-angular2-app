@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
-
-import {UsersService} from "../../common/services/users.service";
+import {User} from "../../common/models/user.model";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   moduleId: module.id,
@@ -13,20 +13,17 @@ export class LoginComponent {
   private username: string = '';
   private password: string = '';
 
-  constructor(
-    private router: Router,
-    private usersService: UsersService
-  ) {}
+  constructor(private router: Router,
+              private authService: AuthService) {
+  }
 
   login(event: Event): void {
     event.preventDefault();
-    console.log("Username: ", this.username);
-    console.log("Password: ", this.password);
-    if (this.usersService.checkUser(this.username, this.password)) {
-      this.router.navigate(['/home']);
-    } else {
-      console.log("Login error. Type userName is: test, and password is: 1qaz2wsx");
-    }
-
+    this.authService.authenticateUser(new User(this.username, this.password))
+      .then(result => this.router.navigate(['/home']))
+      .catch(error => {
+        console.log(error);
+        console.log("Login error. Type userName is: test, and password is: 1qaz2wsx")
+      });
   }
 }

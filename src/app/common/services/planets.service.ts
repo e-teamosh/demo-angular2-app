@@ -1,6 +1,5 @@
-import {Injectable} from '@angular/core';
-
-import {Planet} from '../models/planet.model';
+import {Injectable} from "@angular/core";
+import {Planet} from "../models/planet.model";
 
 @Injectable()
 export class PlanetsService {
