@@ -1,8 +1,11 @@
 import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {User} from "../../common/models/user.model";
 import {equalPassword, isPasswordMismatchError} from "../../common/validators/equalPassword.validator";
 import {constants} from "../../common/constants";
+import {AuthService} from "../services/auth.service";
+import {NotificationService} from "../../core/services/notification.service";
 
 @Component({
   moduleId: module.id,
@@ -18,7 +21,9 @@ export class SignupComponent implements OnInit {
   isPasswordMismatchError: boolean = false;
 
   constructor(private router: Router,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private authService: AuthService,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -35,8 +40,10 @@ export class SignupComponent implements OnInit {
 
   join(event: Event): void {
     event.preventDefault();
-
-    this.router.navigate(['/home']);
+    let newUser = new User(this.signupForm.value.userName, this.signupForm.value.password);
+    this.authService.signUp(newUser)
+      .then(result => this.router.navigate(['/home']))
+      .catch(error => this.notificationService.showError(error));
   }
 
   private onValueChanged(data?: any): void {

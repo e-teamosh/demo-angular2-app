@@ -4,18 +4,16 @@ import {User} from "../../common/models/user.model";
 import {UsersService} from "../../common/services/users.service";
 import {StorageService} from "../../core/services/storage.service";
 import {constants} from "../../common/constants";
-import {USERS} from "../../common/data/users";
 
 @Injectable()
 export class AuthService {
-  private users: User[] = USERS;
-
   constructor(private usersService: UsersService,
               private storage: StorageService) {
   }
 
   authenticateUser(user: User): Promise<User> {
-    if (_.find(this.users, storedUser => user.getUserName() === storedUser.getUserName() && user.getPassword() === storedUser.getPassword())) {
+    const USERS = this.usersService.getUsers();
+    if (_.find(USERS, storedUser => user.getUserName() === storedUser.getUserName() && user.getPassword() === storedUser.getPassword())) {
       this.usersService.setLoggedUser(user);
       return Promise.resolve(user);
     } else {
@@ -26,6 +24,11 @@ export class AuthService {
 
   isAuthorized(): boolean {
     return !!this.storage.getKey(constants.storageKey.loggedUser);
+  }
+
+  signUp(newUser: User): Promise<User> {
+    this.usersService.addUser(newUser);
+    return Promise.resolve(newUser);
   }
 
   logout(): void {

@@ -6,9 +6,13 @@ import {StorageService} from "../../core/services/storage.service";
 
 @Injectable()
 export class UsersService {
+  private users: User[];
   private loggedUser: LoggedUser;
 
   constructor(private storage: StorageService) {
+    this.users = [
+      new User('test', '1qaz2wsx')
+    ];
     this.loggedUser = new LoggedUser();
   }
 
@@ -28,6 +32,14 @@ export class UsersService {
   clearLoggedUser(): void {
     this.loggedUser.clear();
     this.storage.deleteKey(constants.storageKey.loggedUser);
+  }
+
+  getUsers(): User[] {
+    return this.users;
+  }
+
+  addUser(newUser: User): void {
+    this.users.push(newUser);
   }
 
 }
