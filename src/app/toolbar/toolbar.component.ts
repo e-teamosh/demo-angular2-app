@@ -6,11 +6,11 @@ import {UsersService} from "../common/services/users.service";
 
 @Component({
   moduleId: module.id,
-  selector: 'wf-app-root',
-  templateUrl: './app-root.component.html',
-  styleUrls: ['./app-root.component.scss']
+  selector: 'wf-toolbar',
+  templateUrl: './toolbar.component.html',
+  styleUrls: ['./toolbar.component.scss']
 })
-export class AppRootComponent implements OnInit {
+export class ToolbarComponent implements OnInit {
   loggedUser: LoggedUser;
 
   constructor(private router: Router,
@@ -31,5 +31,4 @@ export class AppRootComponent implements OnInit {
     this.router.navigate(['./login']);
     console.log("Logout");
   }
-
 }
