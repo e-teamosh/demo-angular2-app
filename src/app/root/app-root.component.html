@@ -1,7 +1,11 @@
 <md-toolbar color="primary">
   <span>Weather Forecast</span>
 
-  <span >{{loggedUser.getUserName()}}</span>
+  <span *ngIf="isAuthorized()">
+    <span >{{loggedUser.getUserName()}}</span>
+    <button (click)="logout()">Logout</button>
+  </span>
+
 </md-toolbar>
 
 <router-outlet></router-outlet>

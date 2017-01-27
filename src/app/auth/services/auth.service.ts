@@ -28,6 +28,7 @@ export class AuthService {
 
   signUp(newUser: User): Promise<User> {
     this.usersService.addUser(newUser);
+    this.usersService.setLoggedUser(newUser);
     return Promise.resolve(newUser);
   }
 
