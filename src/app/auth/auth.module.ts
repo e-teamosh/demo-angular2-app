@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MaterialModule} from "@angular/material";
 import {RouterModule} from "@angular/router";
 import {authRoutes} from "./auth.routes";
@@ -17,6 +17,7 @@ import {AuthService} from "./services/auth.service";
     BrowserModule,
     FormsModule,
     MaterialModule.forRoot(),
+    ReactiveFormsModule,
     RouterModule.forRoot(authRoutes, {
       useHash: true
     })
