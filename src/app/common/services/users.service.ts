@@ -1,4 +1,5 @@
 import {Injectable} from "@angular/core";
+import * as _ from "lodash";
 import {constants} from "../constants";
 import {LoggedUser} from "../models/logged-user.model";
 import {User} from "../models/user.model";
@@ -39,7 +40,12 @@ export class UsersService {
   }
 
   addUser(newUser: User): void {
-    this.users.push(newUser);
+    let foundUser = _.find(this.users, user => user.getUserName() === newUser.getUserName());
+    if (_.isEmpty(foundUser)) {
+      this.users.push(newUser);
+    } else {
+      _.assign(foundUser, newUser);
+    }
   }
 
 }
