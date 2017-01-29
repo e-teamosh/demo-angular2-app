@@ -1,7 +1,7 @@
 <md-toolbar color="primary">
   <span>Weather Forecast</span>
 
-  <span *ngIf="isAuthorized()">
+  <span *ngIf="isAuthorized">
     <span >{{loggedUser.getUserName()}}</span>
     <button (click)="logout()">Logout</button>
   </span>

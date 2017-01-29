@@ -22,13 +22,13 @@ export class ToolbarComponent implements OnInit {
     this.loggedUser = this.usersService.getLoggedUser();
   }
 
-  isAuthorized(): boolean {
-    return this.authService.isAuthorized();
-  }
-
   logout(): void {
     this.authService.logout();
     this.router.navigate(['./login']);
     console.log("Logout");
+  }
+
+  get isAuthorized(): boolean {
+    return this.authService.isAuthorized();
   }
 }

@@ -47,7 +47,7 @@ export class SignupComponent implements OnInit {
       .catch(error => this.notificationService.showError(error));
   }
 
-  get isUserNameInvalid() {
+  get isUserNameInvalid(): boolean {
     if (_.isEmpty(this.signupForm)) {
       return null;
     }
@@ -55,7 +55,7 @@ export class SignupComponent implements OnInit {
     return _.has(control.errors, constants.customValidationErrors.userNameMaxLength.key);
   }
 
-  get isPasswordInvalid() {
+  get isPasswordInvalid(): boolean {
     if (_.isEmpty(this.signupForm)) {
       return null;
     }
