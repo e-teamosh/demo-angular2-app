@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import * as _ from "lodash";
 import {User} from "../../common/models/user.model";
 import {equalPassword, isPasswordMismatchError} from "../../common/validators/equalPassword.validator";
 import {constants} from "../../common/constants";
@@ -16,9 +17,10 @@ import {NotificationService} from "../../core/services/notification.service";
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   validationMessages = {
-    passwordMismatch: ''
+    passwordMismatch: '',
+    userNameMaxLength: ''
   };
-  isPasswordMismatchError: boolean = false;
+  userNameMaxLength: number = constants.userNameMaxLength;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
@@ -28,14 +30,13 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
-      userName: ['', Validators.required],
+      userName: ['', Validators.compose([Validators.required, Validators.maxLength(this.userNameMaxLength)])],
       password: ['', Validators.compose([Validators.required, equalPassword('confirmPassword')])],
       confirmPassword: ['', Validators.compose([Validators.required, equalPassword('password')])]
     });
 
-    this.signupForm.valueChanges.subscribe(data => this.onValueChanged(data));
-
     this.validationMessages.passwordMismatch = constants.customValidationErrors.passwordMismatch.message;
+    this.validationMessages.userNameMaxLength = constants.customValidationErrors.userNameMaxLength.message;
   }
 
   join(event: Event): void {
@@ -46,12 +47,20 @@ export class SignupComponent implements OnInit {
       .catch(error => this.notificationService.showError(error));
   }
 
-  private onValueChanged(data?: any): void {
-    if (!this.signupForm) {
-      return;
+  get isUserNameInvalid() {
+    if (_.isEmpty(this.signupForm)) {
+      return null;
+    }
+    let control = this.signupForm.get('userName');
+    return _.has(control.errors, constants.customValidationErrors.userNameMaxLength.key);
+  }
+
+  get isPasswordInvalid() {
+    if (_.isEmpty(this.signupForm)) {
+      return null;
     }
     const passwordFormControl = this.signupForm.get('password');
     const confirmPasswordFormControl = this.signupForm.get('confirmPassword');
-    this.isPasswordMismatchError = isPasswordMismatchError(passwordFormControl, confirmPasswordFormControl);
+    return isPasswordMismatchError(passwordFormControl, confirmPasswordFormControl);
   }
 }
