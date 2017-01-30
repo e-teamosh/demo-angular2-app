@@ -1,12 +1,14 @@
 import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import {Router, CanDeactivate} from "@angular/router";
 import * as _ from "lodash";
 import {User} from "../../common/models/user.model";
 import {equalPassword, isPasswordMismatchError} from "../../common/validators/equalPassword.validator";
 import {constants} from "../../common/constants";
 import {AuthService} from "../services/auth.service";
+import {DialogService} from "../../core/services/dialog.service";
 import {NotificationService} from "../../core/services/notification.service";
+import {CanComponentDeactivate} from "../../common/services/can-deactivate-guard.service";
 
 @Component({
   moduleId: module.id,
@@ -14,7 +16,7 @@ import {NotificationService} from "../../core/services/notification.service";
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, CanDeactivate<CanComponentDeactivate> {
   signupForm: FormGroup;
   validationMessages = {
     passwordMismatch: '',
@@ -25,6 +27,7 @@ export class SignupComponent implements OnInit {
   constructor(private router: Router,
               private formBuilder: FormBuilder,
               private authService: AuthService,
+              private dialogService: DialogService,
               private notificationService: NotificationService) {
   }
 
@@ -37,6 +40,16 @@ export class SignupComponent implements OnInit {
 
     this.validationMessages.passwordMismatch = constants.customValidationErrors.passwordMismatch.message;
     this.validationMessages.userNameMaxLength = constants.customValidationErrors.userNameMaxLength.message;
+  }
+
+  canDeactivate(): Promise<boolean> | boolean {
+    // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
+    if (this.signupForm.invalid) {
+      return true;
+    }
+    // Otherwise ask the user with the dialog service and return its
+    // promise which resolves to true or false when the user decides
+    return this.dialogService.confirm('Discard changes?');
   }
 
   join(event: Event): void {
