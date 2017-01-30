@@ -32,8 +32,10 @@ export class AuthService {
         this.usersService.setLoggedUser(newUser);
         return Promise.resolve(newUser);
       })
-      .catch(error => Promise.reject(new Error('SignUp failed. User already exist.')));
-
+      .catch(error => {
+        console.log('SignUp failed. ' + error);
+        return Promise.reject(new Error('SignUp failed. User already exist.'))
+      });
   }
 
   logout(): void {

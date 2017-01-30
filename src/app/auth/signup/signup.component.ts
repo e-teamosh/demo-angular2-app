@@ -44,7 +44,10 @@ export class SignupComponent implements OnInit {
     let newUser = new User(this.signupForm.value.userName, this.signupForm.value.password);
     this.authService.signUp(newUser)
       .then(result => this.router.navigate(['/home']))
-      .catch(error => this.notificationService.showError(error));
+      .catch(error => {
+        this.notificationService.showError(error);
+        this.signupForm.reset();
+      });
   }
 
   get isUserNameInvalid(): boolean {
