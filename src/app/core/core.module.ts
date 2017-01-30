@@ -1,17 +1,19 @@
 import {NgModule} from "@angular/core";
-import {DialogService} from "./services/dialog.service";
 import {NotificationService} from "./services/notification.service";
 import {StorageService} from "./services/storage.service";
+import {DialogModule} from "./dialog/dialog.module";
 
 @NgModule({
-  imports: [],
+  imports: [
+    DialogModule
+  ],
   exports: [],
   declarations: [],
+  entryComponents: [],
   providers: [
-    DialogService,
     NotificationService,
     StorageService
-  ],
+  ]
 })
 export class CoreModule {
 }

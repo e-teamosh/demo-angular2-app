@@ -2,7 +2,7 @@ import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {MaterialModule} from "@angular/material";
 import {AppRootComponent} from "./app-root.component";
-import {PageNotFoundComponent} from "./pagenotfound/page-not-found.component";
+import {PageNotFoundComponent} from "./pageNotFound/page-not-found.component";
 import {ToolbarComponent} from "./toolbar/toolbar.component";
 import {AuthModule} from "./auth/auth.module";
 import {CommonModule} from "./common/common.module";
