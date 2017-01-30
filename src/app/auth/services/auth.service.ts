@@ -27,9 +27,13 @@ export class AuthService {
   }
 
   signUp(newUser: User): Promise<User> {
-    this.usersService.addUser(newUser);
-    this.usersService.setLoggedUser(newUser);
-    return Promise.resolve(newUser);
+    return this.usersService.addUser(newUser)
+      .then(result => {
+        this.usersService.setLoggedUser(newUser);
+        return Promise.resolve(newUser);
+      })
+      .catch(error => Promise.reject(new Error('SignUp failed. User already exist.')));
+
   }
 
   logout(): void {
