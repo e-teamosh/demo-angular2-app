@@ -1,10 +1,8 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {MaterialModule} from "@angular/material";
-import {RouterModule} from "@angular/router";
-import {homeRoutes} from "./home.routes";
+import {HomeRoutingModule} from "./home-routing.module";
 import {HomeComponent} from "./home.component";
-
 
 @NgModule({
   declarations: [
@@ -13,9 +11,7 @@ import {HomeComponent} from "./home.component";
   imports: [
     BrowserModule,
     MaterialModule.forRoot(),
-    RouterModule.forRoot(homeRoutes, {
-      useHash: true
-    })
+    HomeRoutingModule
   ],
   providers: [],
   exports: [HomeComponent],
