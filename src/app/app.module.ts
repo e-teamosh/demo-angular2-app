@@ -3,7 +3,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {MaterialModule} from "@angular/material";
 import {RouterModule} from "@angular/router";
 import {AppRootComponent} from "./app-root.component";
-import {NotFoundComponent} from "./notfound/not-found.component";
+import {PageNotFoundComponent} from "./pagenotfound/not-found.component";
 import {ToolbarComponent} from "./toolbar/toolbar.component";
 import {appRoutes} from "./app.routes";
 import {AuthModule} from "./auth/auth.module";
@@ -14,7 +14,7 @@ import {HomeModule} from "./home/home.module";
 @NgModule({
   declarations: [
     AppRootComponent,
-    NotFoundComponent,
+    PageNotFoundComponent,
     ToolbarComponent
   ],
   imports: [
@@ -30,7 +30,7 @@ import {HomeModule} from "./home/home.module";
   ],
   exports: [
     AppRootComponent,
-    NotFoundComponent,
+    PageNotFoundComponent,
     ToolbarComponent
   ],
   entryComponents: [AppRootComponent],
