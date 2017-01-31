@@ -58,13 +58,12 @@ export class SignupComponent implements OnInit, CanDeactivate<CanComponentDeacti
 
   join(event: Event): void {
     event.preventDefault();
+    this.formSubmitted = true;
     let newUser = new User(this.signupForm.value.userName, this.signupForm.value.password);
     this.authService.signUp(newUser)
-      .then(result => {
-        this.formSubmitted = true;
-        this.router.navigate(['/home'])
-      })
+      .then(result => this.router.navigate(['/home']))
       .catch(error => {
+        this.formSubmitted = false;
         this.notificationService.showError(error);
         this.signupForm.reset();
       });
