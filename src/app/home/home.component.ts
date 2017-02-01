@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {Planet} from "../common/models/planet.model";
+import {CityService} from "../common/services/city.service";
 import {PlanetsService} from "../common/services/planets.service";
 import {WFHttpService} from "../core/http-client/services/http.service";
 
@@ -13,10 +14,14 @@ export class HomeComponent implements OnInit {
   planetsList: Planet[] = [];
   selectedPlanet: Planet;
 
-  constructor(private planetsService: PlanetsService, private http: WFHttpService) {
+  constructor(private planetsService: PlanetsService,
+              private http: WFHttpService,
+              private cityService: CityService) {
   }
 
   ngOnInit(): void {
+    this.cityService.getCityListFromJson();
+
     this.planetsService.getPlanets()
       .then(planets => this.planetsList = planets);
     this.selectedPlanet = new Planet();
