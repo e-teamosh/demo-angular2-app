@@ -39,10 +39,10 @@ export class City {
     return this.coord;
   }
 
-  fillFromObj(cityObj: City): void {
+  fillFromObject(cityObj: City): void {
     Object.assign(this, cityObj);
     let coord = new Coord();
-    coord.fillFromObj(cityObj.coord);
+    coord.fillFromObject(cityObj.coord);
     this.setCoord(coord);
   }
 }

@@ -1,10 +1,5 @@
-import {UserBasic} from "../interfaces/user-basic.interface";
-
-export class LoggedUser implements UserBasic {
-  userName: string;
-
-  constructor(userName: string = '') {
-    this.setUserName(userName);
+export class LoggedUser {
+  constructor(private userName: string = '') {
   }
 
   setUserName(userName: string): void {
@@ -17,5 +12,9 @@ export class LoggedUser implements UserBasic {
 
   clear(): void {
     this.setUserName('');
+  }
+
+  fillFromObject(loggedUser: LoggedUser): void {
+    Object.assign(this, loggedUser);
   }
 }

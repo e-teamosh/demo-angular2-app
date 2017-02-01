@@ -18,7 +18,7 @@ export class Coord {
     return this.lat;
   }
 
-  fillFromObj(coordObj: Coord): void {
+  fillFromObject(coordObj: Coord): void {
     Object.assign(this, coordObj);
   }
 }

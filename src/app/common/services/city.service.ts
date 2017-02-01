@@ -19,7 +19,7 @@ export class CityService {
         console.log(body);
         _.forEach(body, (cityItem => {
           let city = new City();
-          city.fillFromObj(cityItem);
+          city.fillFromObject(cityItem);
           this.cityList.push(city);
         }));
         console.dir(this.cityList);

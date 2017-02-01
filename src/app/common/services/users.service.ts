@@ -27,7 +27,7 @@ export class UsersService {
   getLoggedUser(): LoggedUser {
     let result: any | null = this.storage.getKey(this.storageKeys.loggedUser);
     if (result instanceof Object) {
-      this.loggedUser.setUserName(result.userName);
+      this.loggedUser.fillFromObject(result);
     }
     return this.loggedUser;
   }

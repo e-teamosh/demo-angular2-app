@@ -1,13 +1,6 @@
-import {UserBasic} from "../interfaces/user-basic.interface";
-import {UserPassword} from "../interfaces/user-password.interface";
-
-export class User implements UserBasic, UserPassword {
-  userName: string;
-  password: string;
-
-  constructor(userName: string, password: string) {
-    this.setUserName(userName);
-    this.setPassword(password);
+export class User {
+  constructor(private userName: string = '',
+              private password: string = '') {
   }
 
   setUserName(userName: string): void {
@@ -24,5 +17,9 @@ export class User implements UserBasic, UserPassword {
 
   getPassword(): string {
     return this.password;
+  }
+
+  fillFromObject(user: User): void {
+    Object.assign(this, user);
   }
 }

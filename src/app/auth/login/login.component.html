@@ -1,17 +1,17 @@
 <div class="login jumbotron center-block">
   <h1>Login</h1>
-  <form role="form" name="loginForm" (ngSubmit)="login($event); loginForm.reset()" #loginForm="ngForm">
+  <form role="form" [formGroup]="loginForm" (ngSubmit)="login($event); loginForm.reset()">
     <div class="form-group">
       <label for="username">Username</label>
-      <input id="username" type="text" [(ngModel)]="username" name="username" class="form-control" placeholder="Username" required
-        autocomplete="off">
+      <input id="username" type="text" formControlName="userName" class="form-control" placeholder="Username"
+             autocomplete="off">
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input id="password" type="password" [(ngModel)]="password" name="password" class="form-control" placeholder="Password"
-        autocomplete="off">
+      <input id="password" type="password" formControlName="password" class="form-control" placeholder="Password"
+             autocomplete="off">
     </div>
-    <button type="submit" class="btn btn-default" [disabled]="loginForm.form.invalid">Login</button>
+    <button type="submit" class="btn btn-default" [disabled]="loginForm.invalid">Login</button>
     <a [routerLink]="['/signup']">Click here to Signup</a>
   </form>
 </div>
