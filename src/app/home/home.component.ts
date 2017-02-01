@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
       .catch(error => console.log(error));
   }
 
-  showPlanetInfo(selPlanet): void {
+  showPlanetInfo(selPlanet: Planet): void {
     this.selectedPlanet = selPlanet;
   }
 

@@ -66,7 +66,7 @@ export class SignupComponent implements OnInit, CanDeactivate<CanComponentDeacti
       });
   }
 
-  get isUserNameInvalid(): boolean {
+  get isUserNameInvalid(): boolean | null {
     if (_.isEmpty(this.signupForm)) {
       return null;
     }
@@ -74,7 +74,7 @@ export class SignupComponent implements OnInit, CanDeactivate<CanComponentDeacti
     return _.has(control.errors, this.validationErrors.userNameMaxLength.key);
   }
 
-  get isPasswordInvalid(): boolean {
+  get isPasswordInvalid(): boolean | null {
     if (_.isEmpty(this.signupForm)) {
       return null;
     }

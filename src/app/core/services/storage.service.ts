@@ -15,7 +15,7 @@ export class StorageService {
   }
 
   getKey(keyName: string): any | null {
-    let result: string = this.storage.getItem(keyName);
+    let result: string | null = this.storage.getItem(keyName);
     if (result) {
       return JSON.parse(result);
     }

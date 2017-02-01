@@ -6,7 +6,7 @@ export const USER_NAME_MAX_LENGTH = 25;
 
 export interface CustomValidationError {
   key: string;
-  message: any
+  message: string
 }
 
 export class CustomValidationErrors {
