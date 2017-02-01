@@ -3,7 +3,7 @@ import * as _ from "lodash";
 import {User} from "../../common/models/user.model";
 import {UsersService} from "../../common/services/users.service";
 import {StorageService} from "../../core/services/storage.service";
-import {constants} from "../../common/constants";
+import {StorageKeys} from "../../common/constants";
 
 @Injectable()
 export class AuthService {
@@ -23,7 +23,8 @@ export class AuthService {
   }
 
   isAuthorized(): boolean {
-    return !!this.storage.getKey(constants.storageKey.loggedUser);
+    let storageKeys = new StorageKeys();
+    return !!this.storage.getKey(storageKeys.loggedUser);
   }
 
   signUp(newUser: User): Promise<User> {

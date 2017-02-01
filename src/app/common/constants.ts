@@ -1,18 +1,26 @@
-export const constants = {
-  storageKey: {
-    loggedUser: 'logged-user'
-  },
+export class StorageKeys {
+  readonly loggedUser = 'logged-user';
+}
 
-  userNameMaxLength: 25,
+export const USER_NAME_MAX_LENGTH = 25;
 
-  customValidationErrors: {
-    userNameMaxLength: {
-      key: 'maxlength',
-      message: 'Name cannot be more than 25 characters long.'
-    },
-    passwordMismatch: {
-      key: 'passwordMismatch',
-      message: 'Password mismatch.'
-    }
-  }
-};
+export interface CustomValidationError {
+  key: string;
+  message: any
+}
+
+export class CustomValidationErrors {
+  readonly userNameMaxLength: CustomValidationError = {
+    key: 'maxlength',
+    message: `Name cannot be more than ${USER_NAME_MAX_LENGTH} characters long.`
+  };
+  readonly passwordMismatch: CustomValidationError = {
+    key: 'passwordMismatch',
+    message: 'Password mismatch.'
+  };
+}
+
+export class UnitsFormat {
+  readonly Fahrenheit: 'imperial';
+  readonly Celsius: 'metric';
+}

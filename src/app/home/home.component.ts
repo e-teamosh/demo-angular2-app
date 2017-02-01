@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {Planet} from "../common/models/planet.model";
 import {PlanetsService} from "../common/services/planets.service";
-import {CustomHttpService} from "../core/http-client/services/custom-http.service";
+import {WFHttpService} from "../core/http-client/services/http.service";
 
 @Component({
   moduleId: module.id,
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   planetsList: Planet[] = [];
   selectedPlanet: Planet;
 
-  constructor(private planetsService: PlanetsService, private http: CustomHttpService) {
+  constructor(private planetsService: PlanetsService, private http: WFHttpService) {
   }
 
   ngOnInit(): void {

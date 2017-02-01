@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {BaseRequestOptions, RequestOptions, URLSearchParams} from "@angular/http";
 import {environment} from "../../../../environments/environment"
+import {UnitsFormat} from "../../../common/constants";
 
 @Injectable()
 export class DefaultRequestOptionsService extends BaseRequestOptions {
@@ -11,11 +12,12 @@ export class DefaultRequestOptionsService extends BaseRequestOptions {
 
     // Set the default query params
     this.search = new URLSearchParams();
-    this.search.set('appid', environment.apiKey)
+    this.search.set('appid', environment.apiKey);
+    this.search.set('units', new UnitsFormat().Fahrenheit);
   }
 }
 
-export const requetsOptionsProvider = {
+export const REQUEST_OPTIONS_PROVIDER = {
   provide: RequestOptions,
   useClass: DefaultRequestOptionsService
 };

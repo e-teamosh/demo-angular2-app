@@ -5,7 +5,7 @@
       <label for="username">Username</label>
       <input id="username" type="text" formControlName="userName" class="form-control"
              placeholder="Username" autocomplete="off">
-      <i class="form-error" *ngIf="isUserNameInvalid">{{validationMessages.userNameMaxLength}}</i>
+      <i class="form-error" *ngIf="isUserNameInvalid">{{validationErrors.userNameMaxLength.message}}</i>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
@@ -16,7 +16,7 @@
       <label for="confirm-password">Confirm Password</label>
       <input id="confirm-password" type="password" formControlName="confirmPassword"
              class="form-control" placeholder="Confirm Password" autocomplete="off">
-      <i class="form-error" *ngIf="isPasswordInvalid">{{validationMessages.passwordMismatch}}</i>
+      <i class="form-error" *ngIf="isPasswordInvalid">{{validationErrors.passwordMismatch.message}}</i>
     </div>
     <button type="submit" class="btn btn-default" [disabled]="signupForm.invalid">Join</button>
   </form>

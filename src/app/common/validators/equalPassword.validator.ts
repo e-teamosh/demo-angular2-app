@@ -1,8 +1,8 @@
 import {ValidatorFn, AbstractControl} from "@angular/forms";
 import * as _ from "lodash";
-import {constants} from "../constants";
+import {CustomValidationErrors} from "../constants";
 
-const ERROR_NAME = constants.customValidationErrors.passwordMismatch.key;
+const ERROR_KEY = new CustomValidationErrors().passwordMismatch.key;
 
 export function equalPassword(fieldName: string): ValidatorFn {
   return (control: AbstractControl): {[key: string]: boolean} => {
@@ -17,11 +17,11 @@ export function equalPassword(fieldName: string): ValidatorFn {
     otherControl.setErrors(null);
 
     return !_.isEmpty(control.value) && !_.isEmpty(otherControl.value) &&
-    control.value === otherControl.value ? null : {[ERROR_NAME]: true};
+    control.value === otherControl.value ? null : {[ERROR_KEY]: true};
   }
 }
 
 export function isPasswordMismatchError(passwordFormControl: AbstractControl, confirmPasswordFormControl: AbstractControl): boolean {
-  let passwordMismatch = _.has(passwordFormControl.errors, ERROR_NAME) || _.has(confirmPasswordFormControl.errors, ERROR_NAME);
+  let passwordMismatch = _.has(passwordFormControl.errors, ERROR_KEY) || _.has(confirmPasswordFormControl.errors, ERROR_KEY);
   return passwordMismatch && !_.isEmpty(passwordFormControl.value) && !_.isEmpty(confirmPasswordFormControl.value);
 }

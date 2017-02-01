@@ -4,7 +4,7 @@ import {Router, CanDeactivate} from "@angular/router";
 import * as _ from "lodash";
 import {User} from "../../common/models/user.model";
 import {equalPassword, isPasswordMismatchError} from "../../common/validators/equalPassword.validator";
-import {constants} from "../../common/constants";
+import {USER_NAME_MAX_LENGTH, CustomValidationErrors} from "../../common/constants";
 import {AuthService} from "../services/auth.service";
 import {DialogService} from "../../core/dialog/services/dialog.service";
 import {NotificationService} from "../../core/services/notification.service";
@@ -20,11 +20,7 @@ import {Observable} from "rxjs";
 export class SignupComponent implements OnInit, CanDeactivate<CanComponentDeactivate> {
   signupForm: FormGroup;
   formSubmitted: boolean;
-  validationMessages = {
-    passwordMismatch: '',
-    userNameMaxLength: ''
-  };
-  userNameMaxLength: number = constants.userNameMaxLength;
+  validationErrors: CustomValidationErrors;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
@@ -36,13 +32,14 @@ export class SignupComponent implements OnInit, CanDeactivate<CanComponentDeacti
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
-      userName: ['', Validators.compose([Validators.required, Validators.maxLength(this.userNameMaxLength)])],
+      userName: ['', Validators.compose([Validators.required, Validators.maxLength(USER_NAME_MAX_LENGTH)])],
       password: ['', Validators.compose([Validators.required, equalPassword('confirmPassword')])],
       confirmPassword: ['', Validators.compose([Validators.required, equalPassword('password')])]
     });
 
-    this.validationMessages.passwordMismatch = constants.customValidationErrors.passwordMismatch.message;
-    this.validationMessages.userNameMaxLength = constants.customValidationErrors.userNameMaxLength.message;
+    this.validationErrors = new CustomValidationErrors();
+    // this.validationErrors.passwordMismatch = CONSTANTS.customValidationErrors.passwordMismatch.message;
+    // this.validationErrors.userNameMaxLength = CONSTANTS.customValidationErrors.userNameMaxLength.message;
 
     this.formSubmitted = false;
   }
@@ -74,7 +71,7 @@ export class SignupComponent implements OnInit, CanDeactivate<CanComponentDeacti
       return null;
     }
     let control = this.signupForm.get('userName');
-    return _.has(control.errors, constants.customValidationErrors.userNameMaxLength.key);
+    return _.has(control.errors, this.validationErrors.userNameMaxLength.key);
   }
 
   get isPasswordInvalid(): boolean {
