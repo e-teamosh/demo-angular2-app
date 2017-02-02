@@ -20,7 +20,16 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cityService.getCityListFromJson();
+    this.cityService.getAllCityListFromJson()
+      .then(result => {
+        console.dir(result);
+        return this.cityService.getCountriesFromCityList();
+      })
+      .then(result => {
+        console.dir(result);
+        return this.cityService.getCityListByQuery('new Y', 'US');
+      })
+      .then(result => console.dir(result));
 
     this.planetsService.getPlanets()
       .then(planets => this.planetsList = planets);
