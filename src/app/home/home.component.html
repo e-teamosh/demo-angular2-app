@@ -1,23 +1,25 @@
 <main>
   <h1>Home</h1>
   <form role="form" name="cityForm" [formGroup]="cityForm" (ngSubmit)="getWeatherForecast($event)">
-    <md-select placeholder="Country" formControlName="country">
-      <md-option *ngFor="let country of countries" [value]="country">
-        {{country}}
-      </md-option>
-    </md-select>
+    <md-card>
+      <md-select placeholder="Country" formControlName="country">
+        <md-option *ngFor="let country of countries" [value]="country">
+          {{country}}
+        </md-option>
+      </md-select>
+      <md-input placeholder="City" formControlName="city" *ngIf="isCountrySelected"></md-input>
+      <button md-raised-button color="primary" type="submit" [disabled]="cityForm.invalid">Get Weather Forecast</button>
+    </md-card>
+    <br>
 
-    <md-input placeholder="City" formControlName="city" *ngIf="isCountrySelected"></md-input>
-
-    <button md-raised-button color="primary" type="submit" [disabled]="cityForm.invalid">Get Weather Forecast</button>
-
-    <md-list>
-      <md-radio-group formControlName="cityId">
-        <md-list-item *ngFor="let city of cities | async">
-          <md-radio-button [value]="city.getId()">{{city.getName()}}</md-radio-button>
-        </md-list-item>
-      </md-radio-group>
-    </md-list>
-
+    <md-card>
+      <md-list>
+        <md-radio-group formControlName="cityId">
+          <md-list-item *ngFor="let city of cities | async">
+            <md-radio-button [value]="city.getId()">{{city.getName()}}</md-radio-button>
+          </md-list-item>
+        </md-radio-group>
+      </md-list>
+    </md-card>
   </form>
 </main>
