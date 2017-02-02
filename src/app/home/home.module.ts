@@ -3,6 +3,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {MaterialModule} from "@angular/material";
 import {HomeRoutingModule} from "./home-routing.module";
 import {HomeComponent} from "./home.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import {HomeComponent} from "./home.component";
   imports: [
     BrowserModule,
     MaterialModule.forRoot(),
+    ReactiveFormsModule,
     HomeRoutingModule
   ],
   providers: [],
