@@ -11,7 +11,7 @@ import {ReactiveFormsModule} from "@angular/forms";
   ],
   imports: [
     BrowserModule,
-    MaterialModule.forRoot(),
+    MaterialModule,
     ReactiveFormsModule,
     HomeRoutingModule
   ],
