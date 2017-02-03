@@ -43,13 +43,16 @@ export class WfUsersService {
 
   addUser(newUser: WfUser): Promise<WfUser> {
     return new Promise((resolve, reject) => {
-      let foundUser = _.find(this.users, user => user.getUserName() === newUser.getUserName());
-      if (_.isEmpty(foundUser)) {
-        this.users.push(newUser);
-        return resolve(newUser);
-      } else {
-        return reject(new Error('WfUser already exist.'));
-      }
+      // TODO: remove timeout
+      setTimeout(() => {
+        let foundUser = _.find(this.users, user => user.getUserName() === newUser.getUserName());
+        if (_.isEmpty(foundUser)) {
+          this.users.push(newUser);
+          return resolve(newUser);
+        } else {
+          return reject(new Error('User already exist.'));
+        }
+      }, 1000);
     });
   }
 

@@ -1,6 +1,6 @@
 <div class="login jumbotron center-block">
   <h1>Signup</h1>
-  <form role="form" [formGroup]="signupForm" name="signupForm" (ngSubmit)="join($event)">
+  <form role="form" [formGroup]="signupForm" name="signupForm">
     <div class="form-group">
       <label for="username">Username</label>
       <input id="username" type="text" formControlName="userName" class="form-control"
@@ -18,7 +18,8 @@
              class="form-control" placeholder="Confirm Password" autocomplete="off">
       <i class="form-error" *ngIf="isPasswordInvalid">{{validationErrors.passwordMismatch.message}}</i>
     </div>
-    <button type="submit" class="btn btn-default" [disabled]="signupForm.invalid">Join</button>
+    <wf-async-button [type]="'submit'" [color]="'primary'" [title]="'Join'" [isDisabled]="signupForm.invalid"
+                     (buttonClick)="join($event)"></wf-async-button>
   </form>
   <a [routerLink]="['/login']">Back to Login</a>
 </div>

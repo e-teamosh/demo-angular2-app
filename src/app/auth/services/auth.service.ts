@@ -16,6 +16,7 @@ export class WfAuthService {
   authenticateUser(user: WfUser): Promise<WfUser> {
     this.wfSpinnerService.addSpinner();
     return new Promise((resolve, reject) => {
+      //TODO: remove timeout
       setTimeout(() => {
         const USERS = this.wfUsersService.getUsers();
         if (_.find(USERS, storedUser => user.getUserName() === storedUser.getUserName() && user.getPassword() === storedUser.getPassword())) {
@@ -47,7 +48,7 @@ export class WfAuthService {
       .catch(error => {
         console.log('SignUp failed. ' + error);
         this.wfSpinnerService.removeSpinner();
-        throw new Error('SignUp failed. WfUser already exist.');
+        throw new Error('SignUp failed. User already exist.');
       });
   }
 
