@@ -42,13 +42,15 @@ export class UsersService {
   }
 
   addUser(newUser: User): Promise<User> {
-    let foundUser = _.find(this.users, user => user.getUserName() === newUser.getUserName());
-    if (_.isEmpty(foundUser)) {
-      this.users.push(newUser);
-      return Promise.resolve(newUser);
-    } else {
-      return Promise.reject(new Error('User already exist.'));
-    }
+    return new Promise((resolve, reject) => {
+      let foundUser = _.find(this.users, user => user.getUserName() === newUser.getUserName());
+      if (_.isEmpty(foundUser)) {
+        this.users.push(newUser);
+        return resolve(newUser);
+      } else {
+        return reject(new Error('User already exist.'));
+      }
+    });
   }
 
 }

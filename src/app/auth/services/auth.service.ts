@@ -12,14 +12,16 @@ export class AuthService {
   }
 
   authenticateUser(user: User): Promise<User> {
-    const USERS = this.usersService.getUsers();
-    if (_.find(USERS, storedUser => user.getUserName() === storedUser.getUserName() && user.getPassword() === storedUser.getPassword())) {
-      this.usersService.setLoggedUser(user);
-      return Promise.resolve(user);
-    } else {
-      console.log('Login failed. UserName is: "test", password is: "1qaz2wsx"');
-      return Promise.reject(new Error('Login failed. Incorrect user name or password.'));
-    }
+    return new Promise((resolve, reject) => {
+      const USERS = this.usersService.getUsers();
+      if (_.find(USERS, storedUser => user.getUserName() === storedUser.getUserName() && user.getPassword() === storedUser.getPassword())) {
+        this.usersService.setLoggedUser(user);
+        return resolve(user);
+      } else {
+        console.log('Login failed. UserName is: "test", password is: "1qaz2wsx"');
+        return reject(new Error('Login failed. Incorrect user name or password.'));
+      }
+    });
   }
 
   isAuthorized(): boolean {
@@ -31,11 +33,11 @@ export class AuthService {
     return this.usersService.addUser(newUser)
       .then(result => {
         this.usersService.setLoggedUser(newUser);
-        return Promise.resolve(newUser);
+        return result;
       })
       .catch(error => {
         console.log('SignUp failed. ' + error);
-        return Promise.reject(new Error('SignUp failed. User already exist.'))
+        throw new Error('SignUp failed. User already exist.');
       });
   }
 
