@@ -1,8 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-import {LoggedUser} from "../common/models/logged-user.model";
-import {AuthService} from "../auth/services/auth.service";
-import {UsersService} from "../common/services/users.service";
+import {WfLoggedUser} from "../common/models/logged-user.model";
+import {WfAuthService} from "../auth/services/auth.service";
+import {WfUsersService} from "../common/services/users.service";
 
 @Component({
   moduleId: module.id,
@@ -10,25 +10,25 @@ import {UsersService} from "../common/services/users.service";
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
-export class ToolbarComponent implements OnInit {
-  loggedUser: LoggedUser;
+export class WfToolbarComponent implements OnInit {
+  loggedUser: WfLoggedUser;
 
   constructor(private router: Router,
-              private authService: AuthService,
-              private usersService: UsersService) {
+              private wfAuthService: WfAuthService,
+              private wfUsersService: WfUsersService) {
   }
 
   ngOnInit(): void {
-    this.loggedUser = this.usersService.getLoggedUser();
+    this.loggedUser = this.wfUsersService.getLoggedUser();
   }
 
   logout(): void {
-    this.authService.logout();
+    this.wfAuthService.logout();
     this.router.navigate(['./login']);
     console.log("Logout");
   }
 
   get isAuthorized(): boolean {
-    return this.authService.isAuthorized();
+    return this.wfAuthService.isAuthorized();
   }
 }

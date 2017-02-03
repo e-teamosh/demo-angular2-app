@@ -1,4 +1,4 @@
-export class LoggedUser {
+export class WfLoggedUser {
   constructor(private userName: string = '') {
   }
 
@@ -14,7 +14,7 @@ export class LoggedUser {
     this.setUserName('');
   }
 
-  fillFromObject(loggedUser: LoggedUser): void {
+  fillFromObject(loggedUser: WfLoggedUser): void {
     Object.assign(this, loggedUser);
   }
 }

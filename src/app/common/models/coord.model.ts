@@ -1,4 +1,4 @@
-export class Coord {
+export class WfCoord {
   constructor(private lon: number = 0,
               private lat: number = 0) {}
 
@@ -18,7 +18,7 @@ export class Coord {
     return this.lat;
   }
 
-  fillFromObject(coordObj: Coord): void {
+  fillFromObject(coordObj: WfCoord): void {
     Object.assign(this, coordObj);
   }
 }

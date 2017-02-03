@@ -1,37 +1,37 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {MaterialModule} from "@angular/material";
-import {AppRootComponent} from "./app-root.component";
-import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
-import {ToolbarComponent} from "./toolbar/toolbar.component";
-import {AuthModule} from "./auth/auth.module";
-import {CommonModule} from "./common/common.module";
-import {CoreModule} from "./core/core.module";
-import {HomeModule} from "./home/home.module";
-import {AppRoutingModule} from "./app-routing.module";
+import {WfAppRootComponent} from "./app-root.component";
+import {WfPageNotFoundComponent} from "./page-not-found/page-not-found.component";
+import {WfToolbarComponent} from "./toolbar/toolbar.component";
+import {WfAuthModule} from "./auth/auth.module";
+import {WfCommonModule} from "./common/common.module";
+import {WfCoreModule} from "./core/core.module";
+import {WfHomeModule} from "./home/home.module";
+import {WfAppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
-    AppRootComponent,
-    PageNotFoundComponent,
-    ToolbarComponent
+    WfAppRootComponent,
+    WfPageNotFoundComponent,
+    WfToolbarComponent
   ],
   imports: [
     BrowserModule,
     MaterialModule.forRoot(),
-    AuthModule,
-    CommonModule,
-    CoreModule,
-    HomeModule,
-    AppRoutingModule
+    WfAuthModule,
+    WfCommonModule,
+    WfCoreModule,
+    WfHomeModule,
+    WfAppRoutingModule
   ],
   exports: [
-    AppRootComponent,
-    PageNotFoundComponent,
-    ToolbarComponent
+    WfAppRootComponent,
+    WfPageNotFoundComponent,
+    WfToolbarComponent
   ],
-  entryComponents: [AppRootComponent],
-  bootstrap: [AppRootComponent]
+  entryComponents: [WfAppRootComponent],
+  bootstrap: [WfAppRootComponent]
 })
-export class AppModule {
+export class WfAppModule {
 }

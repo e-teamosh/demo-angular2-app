@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import * as _ from "lodash";
-import {CityService} from "../common/services/city.service";
-import {City} from "../common/models/city.model";
+import {WfCityService} from "../common/services/city.service";
+import {WfCity} from "../common/models/city.model";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {Subject, Observable} from "rxjs";
 
@@ -11,18 +11,18 @@ import {Subject, Observable} from "rxjs";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class WfHomeComponent implements OnInit {
   countries: string[];
-  cities: Observable<City[]>;
+  cities: Observable<WfCity[]>;
   cityForm: FormGroup;
 
   private searchCityStream = new Subject<string>();
 
-  constructor(private cityService: CityService,
+  constructor(private wfCityService: WfCityService,
               private formBuilder: FormBuilder) {
 
-    this.cityService.getAllCityListFromJson()
-      .then(result => this.cityService.getCountriesFromCityList())
+    this.wfCityService.getAllCityListFromJson()
+      .then(result => this.wfCityService.getCountriesFromCityList())
       .then(result => this.countries = result);
 
   }
@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
     console.log('Submit form');
     let cityId = this.cityForm.get('cityId').value;
     if (!_.isNull(cityId)) {
-      console.log('City ID is: ' + cityId);
+      console.log('WfCity ID is: ' + cityId);
     }
     this.cityForm.reset();
 
@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
           this.clearSelectedCity();
           return Promise.resolve([]);
         }
-        return this.cityService.getCityListByQuery(value, this.cityForm.get('country').value);
+        return this.wfCityService.getCityListByQuery(value, this.cityForm.get('country').value);
       });
   }
 

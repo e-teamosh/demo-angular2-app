@@ -1,10 +1,10 @@
-import {Coord} from "./coord.model";
+import {WfCoord} from "./coord.model";
 
-export class City {
+export class WfCity {
   constructor(private _id: number = 0,
               private name: string = '',
               private country: string = '',
-              private coord: Coord = new Coord()) {
+              private coord: WfCoord = new WfCoord()) {
   }
 
   setId(id: number): void {
@@ -31,17 +31,17 @@ export class City {
     return this.country;
   }
 
-  setCoord(coord: Coord): void {
+  setCoord(coord: WfCoord): void {
     this.coord = coord;
   }
 
-  getCoord(): Coord {
+  getCoord(): WfCoord {
     return this.coord;
   }
 
-  fillFromObject(cityObj: City): void {
+  fillFromObject(cityObj: WfCity): void {
     Object.assign(this, cityObj);
-    let coord = new Coord();
+    let coord = new WfCoord();
     coord.fillFromObject(cityObj.coord);
     this.setCoord(coord);
   }

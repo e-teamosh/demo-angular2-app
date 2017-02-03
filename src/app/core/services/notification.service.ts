@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {MdSnackBar, MdSnackBarConfig} from "@angular/material";
 
 @Injectable()
-export class NotificationService {
+export class WfNotificationService {
   private config: MdSnackBarConfig;
 
   constructor(

@@ -7,10 +7,10 @@ import {MdDialogRef} from "@angular/material";
   templateUrl: 'confirm-dialog.component.html',
   styleUrls: ['confirm-dialog.component.scss']
 })
-export class ConfirmDialogComponent {
+export class WfConfirmDialogComponent {
   title: string;
   message: string;
 
-  constructor(public dialogRef: MdDialogRef<ConfirmDialogComponent>) {
+  constructor(public mdDialogRef: MdDialogRef<WfConfirmDialogComponent>) {
   }
 }

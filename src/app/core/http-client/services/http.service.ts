@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
 
 @Injectable()
-export class WFHttpService {
+export class WfHttpService {
 
   constructor(private http: Http) {
   }

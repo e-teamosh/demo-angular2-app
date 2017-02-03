@@ -2,12 +2,12 @@ import {Component, OnInit, ViewContainerRef} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router, CanDeactivate} from "@angular/router";
 import * as _ from "lodash";
-import {User} from "../../common/models/user.model";
+import {WfUser} from "../../common/models/user.model";
 import {equalPassword, isPasswordMismatchError} from "../../common/validators/equalPassword.validator";
-import {USER_NAME_MAX_LENGTH, CustomValidationErrors} from "../../common/constants";
-import {AuthService} from "../services/auth.service";
-import {DialogService} from "../../core/dialog/services/dialog.service";
-import {NotificationService} from "../../core/services/notification.service";
+import {USER_NAME_MAX_LENGTH, WfCustomValidationErrors} from "../../common/constants";
+import {WfAuthService} from "../services/auth.service";
+import {WfDialogService} from "../../core/dialog/services/dialog.service";
+import {WfNotificationService} from "../../core/services/notification.service";
 import {CanComponentDeactivate} from "../../common/services/can-deactivate-guard.service";
 import {Observable} from "rxjs";
 
@@ -17,16 +17,16 @@ import {Observable} from "rxjs";
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit, CanDeactivate<CanComponentDeactivate> {
+export class WfSignupComponent implements OnInit, CanDeactivate<CanComponentDeactivate> {
   signupForm: FormGroup;
   formSubmitted: boolean;
-  validationErrors: CustomValidationErrors;
+  validationErrors: WfCustomValidationErrors;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
-              private authService: AuthService,
-              private dialogService: DialogService,
-              private notificationService: NotificationService,
+              private wfAuthService: WfAuthService,
+              private wfDialogService: WfDialogService,
+              private wfNotificationService: WfNotificationService,
               private viewContainerRef: ViewContainerRef) {
   }
 
@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit, CanDeactivate<CanComponentDeacti
       confirmPassword: ['', Validators.compose([Validators.required, equalPassword('password')])]
     });
 
-    this.validationErrors = new CustomValidationErrors();
+    this.validationErrors = new WfCustomValidationErrors();
     // this.validationErrors.passwordMismatch = CONSTANTS.customValidationErrors.passwordMismatch.message;
     // this.validationErrors.userNameMaxLength = CONSTANTS.customValidationErrors.userNameMaxLength.message;
 
@@ -48,7 +48,7 @@ export class SignupComponent implements OnInit, CanDeactivate<CanComponentDeacti
     if (this.formSubmitted || this.signupForm.invalid) {
       return true;
     }
-    return this.dialogService
+    return this.wfDialogService
       .confirm('Confirm Dialog', 'Discard changes?', this.viewContainerRef)
       .map(result => result);
   }
@@ -56,12 +56,12 @@ export class SignupComponent implements OnInit, CanDeactivate<CanComponentDeacti
   join(event: Event): void {
     event.preventDefault();
     this.formSubmitted = true;
-    let newUser = new User(this.signupForm.value.userName, this.signupForm.value.password);
-    this.authService.signUp(newUser)
+    let newUser = new WfUser(this.signupForm.value.userName, this.signupForm.value.password);
+    this.wfAuthService.signUp(newUser)
       .then(result => this.router.navigate(['/home']))
       .catch(error => {
         this.formSubmitted = false;
-        this.notificationService.showError(error);
+        this.wfNotificationService.showError(error);
         this.signupForm.reset();
       });
   }

@@ -1,19 +1,19 @@
 import {NgModule} from "@angular/core";
-import {AuthGuardService} from "./services/auth-guard.service";
-import {CanDeactivateGuardService} from "./services/can-deactivate-guard.service";
-import {CityService} from "./services/city.service";
-import {UsersService} from "./services/users.service";
+import {WfAuthGuardService} from "./services/auth-guard.service";
+import {WfCanDeactivateGuardService} from "./services/can-deactivate-guard.service";
+import {WfCityService} from "./services/city.service";
+import {WfUsersService} from "./services/users.service";
 
 @NgModule({
   imports: [],
   exports: [],
   declarations: [],
   providers: [
-    AuthGuardService,
-    CanDeactivateGuardService,
-    CityService,
-    UsersService
-  ],
+    WfAuthGuardService,
+    WfCanDeactivateGuardService,
+    WfCityService,
+    WfUsersService
+  ]
 })
-export class CommonModule {
+export class WfCommonModule {
 }

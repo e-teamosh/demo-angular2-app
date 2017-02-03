@@ -1,17 +1,17 @@
 import {NgModule} from "@angular/core";
 import {Routes, RouterModule} from "@angular/router";
-import {LoginComponent} from "./login/login.component";
-import {SignupComponent} from "./signup/signup.component";
-import {CanDeactivateGuardService} from "../common/services/can-deactivate-guard.service";
+import {WfLoginComponent} from "./login/login.component";
+import {WfSignupComponent} from "./signup/signup.component";
+import {WfCanDeactivateGuardService} from "../common/services/can-deactivate-guard.service";
 
-const authRoutes: Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: 'signup', component: SignupComponent, canDeactivate: [CanDeactivateGuardService]}
+const wfAuthRoutes: Routes = [
+  {path: 'login', component: WfLoginComponent},
+  {path: 'signup', component: WfSignupComponent, canDeactivate: [WfCanDeactivateGuardService]}
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(authRoutes)],
+  imports: [RouterModule.forChild(wfAuthRoutes)],
   exports: [RouterModule]
 })
-export class AuthRoutingModule {
+export class WfAuthRoutingModule {
 }

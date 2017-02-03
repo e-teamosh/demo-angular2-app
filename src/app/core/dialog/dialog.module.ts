@@ -1,18 +1,18 @@
 import {NgModule} from "@angular/core";
 import {MaterialModule} from "@angular/material";
-import {ConfirmDialogComponent} from "./confirm-dialog/confirm-dialog.component";
-import {DialogService} from "./services/dialog.service";
+import {WfConfirmDialogComponent} from "./confirm-dialog/confirm-dialog.component";
+import {WfDialogService} from "./services/dialog.service";
 
 @NgModule({
   imports: [
     MaterialModule
   ],
-  exports: [ConfirmDialogComponent],
-  declarations: [ConfirmDialogComponent],
-  entryComponents: [ConfirmDialogComponent],
+  exports: [WfConfirmDialogComponent],
+  declarations: [WfConfirmDialogComponent],
+  entryComponents: [WfConfirmDialogComponent],
   providers: [
-    DialogService
+    WfDialogService
   ],
 })
-export class DialogModule {
+export class WfDialogModule {
 }

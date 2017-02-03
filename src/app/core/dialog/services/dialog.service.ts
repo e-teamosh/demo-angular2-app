@@ -1,24 +1,24 @@
 import {Injectable, ViewContainerRef} from "@angular/core";
 import {MdDialog, MdDialogRef, MdDialogConfig} from "@angular/material";
-import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
+import {WfConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 import {Observable} from "rxjs";
 
 @Injectable()
-export class DialogService {
-  constructor(private dialog: MdDialog) {
+export class WfDialogService {
+  constructor(private mdDialog: MdDialog) {
   }
 
   confirm(title: string, message: string, viewContainerRef: ViewContainerRef): Observable<boolean> {
-    let dialogRef: MdDialogRef<ConfirmDialogComponent>;
-    let config = new MdDialogConfig();
-    config.viewContainerRef = viewContainerRef;
-    config.disableClose = true;
+    let mdDialogRef: MdDialogRef<WfConfirmDialogComponent>;
+    let mdDialogConfig = new MdDialogConfig();
+    mdDialogConfig.viewContainerRef = viewContainerRef;
+    mdDialogConfig.disableClose = true;
 
-    dialogRef = this.dialog.open(ConfirmDialogComponent, config);
+    mdDialogRef = this.mdDialog.open(WfConfirmDialogComponent, mdDialogConfig);
 
-    dialogRef.componentInstance.title = title;
-    dialogRef.componentInstance.message = message;
+    mdDialogRef.componentInstance.title = title;
+    mdDialogRef.componentInstance.message = message;
 
-    return dialogRef.afterClosed();
+    return mdDialogRef.afterClosed();
   };
 }

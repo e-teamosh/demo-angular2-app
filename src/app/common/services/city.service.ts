@@ -1,17 +1,17 @@
 import {Injectable} from "@angular/core";
 import * as _ from "lodash";
-import {City} from "../models/city.model";
+import {WfCity} from "../models/city.model";
 import {Http} from "@angular/http";
 
 @Injectable()
-export class CityService {
-  private allCityList: City[];
+export class WfCityService {
+  private allCityList: WfCity[];
 
   constructor(private http: Http) {
     this.allCityList = [];
   }
 
-  getAllCityListFromJson(): Promise<City[]>{
+  getAllCityListFromJson(): Promise<WfCity[]>{
     return this.http.get('./assets/city-list/city.list.us.json')
       .toPromise()
       .then(res => {
@@ -28,11 +28,11 @@ export class CityService {
     return new Promise(resolve => resolve(_.uniq(_.map(this.allCityList, 'country'))));
   }
 
-  getCityListByCountry(country: string): City[] {
+  getCityListByCountry(country: string): WfCity[] {
     return _.filter(this.allCityList, (cityItem) => cityItem.getCountry() === country);
   }
 
-  getCityListByQuery(query: string, country: string): Promise<City[]> {
+  getCityListByQuery(query: string, country: string): Promise<WfCity[]> {
     return new Promise(resolve => {
       let cityListByCountry = this.getCityListByCountry(country);
       let foundCityList = _.filter(cityListByCountry, (cityItem) => {
@@ -42,9 +42,9 @@ export class CityService {
     });
 }
 
-  private defineCityList(cities: Object): City[] {
+  private defineCityList(cities: Object): WfCity[] {
     _.forEach(cities, (cityItem => {
-      let city = new City();
+      let city = new WfCity();
       city.fillFromObject(cityItem);
       this.allCityList.push(city);
     }));

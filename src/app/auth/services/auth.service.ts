@@ -1,21 +1,21 @@
 import {Injectable} from "@angular/core";
 import * as _ from "lodash";
-import {User} from "../../common/models/user.model";
-import {UsersService} from "../../common/services/users.service";
-import {StorageService} from "../../core/services/storage.service";
-import {StorageKeys} from "../../common/constants";
+import {WfUser} from "../../common/models/user.model";
+import {WfUsersService} from "../../common/services/users.service";
+import {WfStorageService} from "../../core/services/storage.service";
+import {WfStorageKeys} from "../../common/constants";
 
 @Injectable()
-export class AuthService {
-  constructor(private usersService: UsersService,
-              private storage: StorageService) {
+export class WfAuthService {
+  constructor(private wfUsersService: WfUsersService,
+              private wfStorageService: WfStorageService) {
   }
 
-  authenticateUser(user: User): Promise<User> {
+  authenticateUser(user: WfUser): Promise<WfUser> {
     return new Promise((resolve, reject) => {
-      const USERS = this.usersService.getUsers();
+      const USERS = this.wfUsersService.getUsers();
       if (_.find(USERS, storedUser => user.getUserName() === storedUser.getUserName() && user.getPassword() === storedUser.getPassword())) {
-        this.usersService.setLoggedUser(user);
+        this.wfUsersService.setLoggedUser(user);
         return resolve(user);
       } else {
         console.log('Login failed. UserName is: "test", password is: "1qaz2wsx"');
@@ -25,24 +25,24 @@ export class AuthService {
   }
 
   isAuthorized(): boolean {
-    let storageKeys = new StorageKeys();
-    return !!this.storage.getKey(storageKeys.loggedUser);
+    let storageKeys = new WfStorageKeys();
+    return !!this.wfStorageService.getKey(storageKeys.loggedUser);
   }
 
-  signUp(newUser: User): Promise<User> {
-    return this.usersService.addUser(newUser)
+  signUp(newUser: WfUser): Promise<WfUser> {
+    return this.wfUsersService.addUser(newUser)
       .then(result => {
-        this.usersService.setLoggedUser(newUser);
+        this.wfUsersService.setLoggedUser(newUser);
         return result;
       })
       .catch(error => {
         console.log('SignUp failed. ' + error);
-        throw new Error('SignUp failed. User already exist.');
+        throw new Error('SignUp failed. WfUser already exist.');
       });
   }
 
   logout(): void {
-    this.usersService.clearLoggedUser();
-    this.storage.clear();
+    this.wfUsersService.clearLoggedUser();
+    this.wfStorageService.clear();
   }
 }

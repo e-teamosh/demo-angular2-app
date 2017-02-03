@@ -1,15 +1,15 @@
 import {NgModule} from "@angular/core";
 import {Routes, RouterModule} from "@angular/router";
-import {HomeComponent} from "./home.component";
-import {AuthGuardService} from "../common/services/auth-guard.service";
+import {WfHomeComponent} from "./home.component";
+import {WfAuthGuardService} from "../common/services/auth-guard.service";
 
-const homeRoutes: Routes = [
-  {path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
+const wfHomeRoutes: Routes = [
+  {path: 'home', component: WfHomeComponent, canActivate: [WfAuthGuardService]},
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(homeRoutes)],
+  imports: [RouterModule.forChild(wfHomeRoutes)],
   exports: [RouterModule]
 })
-export class HomeRoutingModule {
+export class WfHomeRoutingModule {
 }

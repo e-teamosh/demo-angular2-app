@@ -6,5 +6,5 @@ import {Component} from "@angular/core";
   templateUrl: 'app-root.component.html',
   styleUrls: ['app-root.component.scss']
 })
-export class AppRootComponent {
+export class WfAppRootComponent {
 }

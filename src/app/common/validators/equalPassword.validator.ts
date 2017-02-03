@@ -1,8 +1,8 @@
 import {ValidatorFn, AbstractControl} from "@angular/forms";
 import * as _ from "lodash";
-import {CustomValidationErrors} from "../constants";
+import {WfCustomValidationErrors} from "../constants";
 
-const ERROR_KEY = new CustomValidationErrors().passwordMismatch.key;
+const ERROR_KEY = new WfCustomValidationErrors().passwordMismatch.key;
 
 export function equalPassword(fieldName: string): ValidatorFn {
   return (control: AbstractControl): {[key: string]: boolean} => {

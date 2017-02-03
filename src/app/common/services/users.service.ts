@@ -1,31 +1,31 @@
 import {Injectable} from "@angular/core";
 import * as _ from "lodash";
-import {StorageKeys} from "../constants";
-import {LoggedUser} from "../models/logged-user.model";
-import {User} from "../models/user.model";
-import {StorageService} from "../../core/services/storage.service";
+import {WfStorageKeys} from "../constants";
+import {WfLoggedUser} from "../models/logged-user.model";
+import {WfUser} from "../models/user.model";
+import {WfStorageService} from "../../core/services/storage.service";
 
 @Injectable()
-export class UsersService {
-  private users: User[];
-  private loggedUser: LoggedUser;
-  private storageKeys: StorageKeys;
+export class WfUsersService {
+  private users: WfUser[];
+  private loggedUser: WfLoggedUser;
+  private storageKeys: WfStorageKeys;
 
-  constructor(private storage: StorageService) {
+  constructor(private wfStorageService: WfStorageService) {
     this.users = [
-      new User('test', '1qaz2wsx')
+      new WfUser('test', '1qaz2wsx')
     ];
-    this.loggedUser = new LoggedUser();
-    this.storageKeys = new StorageKeys();
+    this.loggedUser = new WfLoggedUser();
+    this.storageKeys = new WfStorageKeys();
   }
 
-  setLoggedUser(user: User): void {
+  setLoggedUser(user: WfUser): void {
     this.loggedUser.setUserName(user.getUserName());
-    this.storage.setKey(this.storageKeys.loggedUser, this.loggedUser);
+    this.wfStorageService.setKey(this.storageKeys.loggedUser, this.loggedUser);
   }
 
-  getLoggedUser(): LoggedUser {
-    let result: any | null = this.storage.getKey(this.storageKeys.loggedUser);
+  getLoggedUser(): WfLoggedUser {
+    let result: any | null = this.wfStorageService.getKey(this.storageKeys.loggedUser);
     if (result instanceof Object) {
       this.loggedUser.fillFromObject(result);
     }
@@ -34,21 +34,21 @@ export class UsersService {
 
   clearLoggedUser(): void {
     this.loggedUser.clear();
-    this.storage.deleteKey(this.storageKeys.loggedUser);
+    this.wfStorageService.deleteKey(this.storageKeys.loggedUser);
   }
 
-  getUsers(): User[] {
+  getUsers(): WfUser[] {
     return this.users;
   }
 
-  addUser(newUser: User): Promise<User> {
+  addUser(newUser: WfUser): Promise<WfUser> {
     return new Promise((resolve, reject) => {
       let foundUser = _.find(this.users, user => user.getUserName() === newUser.getUserName());
       if (_.isEmpty(foundUser)) {
         this.users.push(newUser);
         return resolve(newUser);
       } else {
-        return reject(new Error('User already exist.'));
+        return reject(new Error('WfUser already exist.'));
       }
     });
   }

@@ -2,31 +2,33 @@ import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MaterialModule} from "@angular/material";
-import {LoginComponent} from "./login/login.component";
-import {SignupComponent} from "./signup/signup.component";
-import {AuthService} from "./services/auth.service";
-import {AuthRoutingModule} from "./auth-routing.module";
+import {WfLoginComponent} from "./login/login.component";
+import {WfSignupComponent} from "./signup/signup.component";
+import {WfAuthService} from "./services/auth.service";
+import {WfAuthRoutingModule} from "./auth-routing.module";
+import {WfFormControlsModule} from "../common/form-controls/form-controls.module";
 
 @NgModule({
   declarations: [
-    LoginComponent,
-    SignupComponent
+    WfLoginComponent,
+    WfSignupComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     MaterialModule,
     ReactiveFormsModule,
-    AuthRoutingModule
+    WfAuthRoutingModule,
+    WfFormControlsModule
   ],
   providers: [
-    AuthService
+    WfAuthService
   ],
   exports: [
-    LoginComponent,
-    SignupComponent
+    WfLoginComponent,
+    WfSignupComponent
   ],
-  entryComponents: [LoginComponent]
+  entryComponents: [WfLoginComponent]
 })
-export class AuthModule {
+export class WfAuthModule {
 }

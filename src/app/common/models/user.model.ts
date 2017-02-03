@@ -1,4 +1,4 @@
-export class User {
+export class WfUser {
   constructor(private userName: string = '',
               private password: string = '') {
   }
@@ -19,7 +19,7 @@ export class User {
     return this.password;
   }
 
-  fillFromObject(user: User): void {
+  fillFromObject(user: WfUser): void {
     Object.assign(this, user);
   }
 }
