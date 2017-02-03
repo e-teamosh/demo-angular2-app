@@ -15,7 +15,7 @@ import {AuthRoutingModule} from "./auth-routing.module";
   imports: [
     BrowserModule,
     FormsModule,
-    MaterialModule.forRoot(),
+    MaterialModule,
     ReactiveFormsModule,
     AuthRoutingModule
   ],
