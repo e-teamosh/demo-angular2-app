@@ -33,11 +33,13 @@ export class CityService {
   }
 
   getCityListByQuery(query: string, country: string): Promise<City[]> {
-    let cityListByCountry = this.getCityListByCountry(country);
-    let foundCityList = _.filter(cityListByCountry, (cityItem) => {
-      return _.includes(cityItem.getName(), query);
+    return new Promise(resolve => {
+      let cityListByCountry = this.getCityListByCountry(country);
+      let foundCityList = _.filter(cityListByCountry, (cityItem) => {
+        return _.includes(cityItem.getName(), query);
+      });
+      return resolve(foundCityList);
     });
-    return Promise.resolve(foundCityList);
 }
 
   private defineCityList(cities: Object): City[] {
