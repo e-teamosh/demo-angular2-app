@@ -3,7 +3,7 @@
 
   <span *ngIf="isAuthorized">
     <span >{{loggedUser.getUserName()}}</span>
-    <button (click)="logout()">Logout</button>
+    <button md-raised-button color="accent" (click)="logout()">Logout</button>
   </span>
 
 </md-toolbar>
