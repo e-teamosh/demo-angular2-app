@@ -1,18 +1,14 @@
 import {NgModule} from "@angular/core";
-import {BrowserModule} from "@angular/platform-browser";
-import {MaterialModule} from "@angular/material";
 import {WfHomeRoutingModule} from "./home-routing.module";
 import {WfHomeComponent} from "./home.component";
-import {ReactiveFormsModule} from "@angular/forms";
+import {WfCommonModule} from "../common/common.module";
 
 @NgModule({
   declarations: [
     WfHomeComponent
   ],
   imports: [
-    BrowserModule,
-    MaterialModule,
-    ReactiveFormsModule,
+    WfCommonModule,
     WfHomeRoutingModule
   ],
   providers: [],

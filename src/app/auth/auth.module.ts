@@ -1,12 +1,9 @@
 import {NgModule} from "@angular/core";
-import {BrowserModule} from "@angular/platform-browser";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MaterialModule} from "@angular/material";
 import {WfLoginComponent} from "./login/login.component";
 import {WfSignupComponent} from "./signup/signup.component";
 import {WfAuthService} from "./services/auth.service";
 import {WfAuthRoutingModule} from "./auth-routing.module";
-import {WfFormControlsModule} from "../common/form-controls/form-controls.module";
+import {WfCommonModule} from "../common/common.module";
 
 @NgModule({
   declarations: [
@@ -14,12 +11,8 @@ import {WfFormControlsModule} from "../common/form-controls/form-controls.module
     WfSignupComponent
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    MaterialModule,
-    ReactiveFormsModule,
     WfAuthRoutingModule,
-    WfFormControlsModule
+    WfCommonModule
   ],
   providers: [
     WfAuthService

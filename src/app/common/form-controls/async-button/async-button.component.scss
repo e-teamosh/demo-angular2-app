@@ -1,0 +1,14 @@
+.async-button-wrapper {
+  position: relative;
+  height: 36px;
+
+  .async-button {
+    position: absolute;
+    min-width: 100px;
+  }
+
+  .async-spinner {
+    position: absolute;
+    height: 100%;
+  }
+}

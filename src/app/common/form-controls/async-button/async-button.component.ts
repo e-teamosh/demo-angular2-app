@@ -1,4 +1,5 @@
-import {Component, OnInit, Input} from "@angular/core";
+import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
+import {WfSpinnerService} from "./services/spinner.service";
 
 @Component({
   moduleId: module.id,
@@ -7,14 +8,28 @@ import {Component, OnInit, Input} from "@angular/core";
   styleUrls: ['./async-button.component.scss']
 })
 export class WfAsyncButtonComponent implements OnInit {
-  @Input() type: string;
   @Input() isDisabled: boolean;
+  @Input() color: string;
   @Input() title: string;
+  @Input() type: string;
 
-  constructor() {
+  @Output() buttonClick = new EventEmitter();
+
+  isBusy: boolean;
+
+  constructor(private wfSpinnerService: WfSpinnerService) {
+    this.isBusy = false;
   }
 
   ngOnInit() {
+    this.wfSpinnerService.spinner.subscribe(result => {
+      this.isBusy = result;
+      this.isDisabled = result;
+    });
+  }
+
+  onClick(event: Event): void {
+    this.buttonClick.emit(event);
   }
 
 }

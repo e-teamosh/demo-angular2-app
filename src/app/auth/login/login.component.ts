@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {WfUser} from "../../common/models/user.model";
 import {WfAuthService} from "../services/auth.service";
@@ -11,14 +11,16 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class WfLoginComponent {
+export class WfLoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private router: Router,
               private wfAuthService: WfAuthService,
               private wfNotificationService: WfNotificationService,
               private formBuilder: FormBuilder) {
+  }
 
+  ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       userName: ['', Validators.required],
       password: ['']

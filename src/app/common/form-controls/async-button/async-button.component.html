@@ -1,1 +1,8 @@
-<button md-raised-button color="primary" [type]="type" [disabled]="isDisabled">{{title}}</button>
+<div class="async-button-wrapper">
+  <button class="async-button" md-raised-button color="{{color}}"
+          [type]="type"
+          [disabled]="isDisabled"
+          (click)="onClick($event)">{{title}}</button>
+  <md-spinner class="async-spinner" *ngIf="isBusy"></md-spinner>
+</div>
+

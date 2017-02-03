@@ -1,6 +1,4 @@
 import {NgModule} from "@angular/core";
-import {BrowserModule} from "@angular/platform-browser";
-import {MaterialModule} from "@angular/material";
 import {WfAppRootComponent} from "./app-root.component";
 import {WfPageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {WfToolbarComponent} from "./toolbar/toolbar.component";
@@ -17,8 +15,6 @@ import {WfAppRoutingModule} from "./app-routing.module";
     WfToolbarComponent
   ],
   imports: [
-    BrowserModule,
-    MaterialModule.forRoot(),
     WfAuthModule,
     WfCommonModule,
     WfCoreModule,
