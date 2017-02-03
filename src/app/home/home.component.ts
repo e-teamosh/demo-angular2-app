@@ -39,12 +39,12 @@ export class HomeComponent implements OnInit {
 
   getWeatherForecast(event: Event): void {
     event.preventDefault();
+    this.clearSelectedCity();
     console.log('Submit form');
     let cityId = this.cityForm.get('cityId').value;
     if (!_.isNull(cityId)) {
       console.log('City ID is: ' + cityId);
     }
-    this.clearSelectedCity();
     this.cityForm.reset();
 
     // this.http.get('weather?q=London')
@@ -63,14 +63,14 @@ export class HomeComponent implements OnInit {
     });
 
     this.cities = this.searchCityStream
-      .debounceTime(500)
+      .debounceTime(750)
       .distinctUntilChanged()
       .switchMap((value: string) => {
         if (_.isEmpty(value)) {
           this.clearSelectedCity();
           return Promise.resolve([]);
         }
-        return this.cityService.getCityListByQuery(value, this.cityForm.get('country').value)
+        return this.cityService.getCityListByQuery(value, this.cityForm.get('country').value);
       });
   }
 
