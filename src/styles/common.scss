@@ -1,0 +1,16 @@
+.login, .signup {
+  max-width: 450px;
+  margin: auto;
+}
+
+md-input, md-select {
+  width: 100%;
+}
+
+[md-raised-button] {
+  text-transform: uppercase;
+}
+
+.form-error {
+  color: md-color($md-red, 400);
+}

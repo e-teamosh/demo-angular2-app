@@ -1,6 +1,8 @@
 .async-button-wrapper {
   position: relative;
   height: 36px;
+  text-align: right;
+  left: -100px;
 
   .async-button {
     position: absolute;
@@ -10,5 +12,6 @@
   .async-spinner {
     position: absolute;
     height: 100%;
+    right: -100px;
   }
 }

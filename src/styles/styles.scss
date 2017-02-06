@@ -1,12 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import './theme/app-theme.scss';
+@import './common.scss';
 
 body {
-  margin: 10px;
   font-family: Roboto, sans-serif;
+  background-color: md-color($md-teal, 50) !important;
 }
 
-[md-raised-button] {
-  text-transform: uppercase;
+.app-content-wrapper {
+  padding: 0 10px;
 }
 

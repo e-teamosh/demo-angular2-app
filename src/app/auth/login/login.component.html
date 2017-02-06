@@ -1,18 +1,20 @@
-<div class="login jumbotron center-block">
-  <h1>Login</h1>
+<md-card class="login">
+  <md-card-title>Login</md-card-title>
   <form role="form" [formGroup]="loginForm">
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input id="username" type="text" formControlName="userName" class="form-control" placeholder="Username"
-             autocomplete="off">
+    <md-card-content>
+      <md-input id="userName" type="text" formControlName="userName" placeholder="Username"
+                autocomplete="off"></md-input>
+      <md-input id="password" type="password" formControlName="password" placeholder="Password"
+                autocomplete="off"></md-input>
+    </md-card-content>
+    <div class="row">
+      <div class="col-xs-6">
+        <a [routerLink]="['/signup']">Click here to Signup</a>
+      </div>
+      <div class="col-xs-6">
+        <wf-async-button [type]="'submit'" [color]="'primary'" [title]="'Login'" [isDisabled]="loginForm.invalid"
+                         (buttonClick)="login($event)"></wf-async-button>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input id="password" type="password" formControlName="password" class="form-control" placeholder="Password"
-             autocomplete="off">
-    </div>
-    <wf-async-button [type]="'submit'" [color]="'primary'" [title]="'Login'" [isDisabled]="loginForm.invalid"
-                     (buttonClick)="login($event)"></wf-async-button>
-    <a [routerLink]="['/signup']">Click here to Signup</a>
   </form>
-</div>
+</md-card>

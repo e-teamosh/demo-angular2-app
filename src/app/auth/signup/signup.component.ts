@@ -49,7 +49,7 @@ export class WfSignupComponent implements OnInit, CanDeactivate<CanComponentDeac
       return true;
     }
     return this.wfDialogService
-      .confirm('Confirm Dialog', 'Discard changes?', this.viewContainerRef)
+      .confirm('Confirmation', 'Discard changes?', this.viewContainerRef)
       .map(result => result);
   }
 
