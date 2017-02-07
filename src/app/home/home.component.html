@@ -1,14 +1,22 @@
 <main>
-  <h1>Home</h1>
-  <form role="form" name="cityForm" [formGroup]="cityForm" (ngSubmit)="getWeatherForecast($event)">
-    <md-card>
-      <md-select placeholder="Country" formControlName="country">
-        <md-option *ngFor="let country of countries" [value]="country">
-          {{country}}
-        </md-option>
-      </md-select>
-      <md-input placeholder="City" formControlName="city" *ngIf="isCountrySelected"></md-input>
-      <button md-raised-button color="primary" type="submit" [disabled]="cityForm.invalid">Get Weather Forecast</button>
+  <form role="form" name="cityForm" [formGroup]="cityForm">
+    <md-card class="choose-city">
+      <div class="row">
+        <div class="col-sm-4">
+          <md-select placeholder="Country" formControlName="country">
+            <md-option *ngFor="let country of countries" [value]="country">
+              {{country}}
+            </md-option>
+          </md-select>
+        </div>
+        <div class="col-sm-4">
+          <md-input placeholder="City" formControlName="city" *ngIf="isCountrySelected"></md-input>
+        </div>
+        <div class="col-sm-4 text-right">
+          <wf-async-button [type]="'submit'" [color]="'primary'" [title]="'Get Weather Forecast'" [isDisabled]="cityForm.invalid"
+                           (buttonClick)="getWeatherForecast($event)"></wf-async-button>
+        </div>
+      </div>
     </md-card>
     <br>
 
