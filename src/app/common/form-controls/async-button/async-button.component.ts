@@ -1,6 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
-import * as _ from "lodash";
-import {WfSpinnerService, SPINNER} from "../../services/spinner.service";
+import {WfSpinnerService} from "../../services/spinner.service";
 
 @Component({
   moduleId: module.id,
@@ -9,10 +8,11 @@ import {WfSpinnerService, SPINNER} from "../../services/spinner.service";
   styleUrls: ['./async-button.component.scss']
 })
 export class WfAsyncButtonComponent implements OnInit {
-  @Input() isDisabled: boolean;
-  @Input() color: string;
-  @Input() title: string;
-  @Input() type: string;
+  @Input() isDisabled: boolean = false;
+  @Input() color: string = 'primary';
+  @Input() title: string = 'No title';
+  @Input() type: string = 'button';
+  @Input() spinnerIndex: number = 0;
 
   @Output() buttonClick = new EventEmitter();
 
@@ -23,11 +23,9 @@ export class WfAsyncButtonComponent implements OnInit {
   }
 
   ngOnInit() {
-    _.forEach(SPINNER, (item) => {
-      this.wfSpinnerService.spinner[item].subscribe(result => {
-        this.isBusy = result;
-        this.isDisabled = result;
-      });
+    this.wfSpinnerService.spinner[this.spinnerIndex].subscribe(result => {
+      this.isBusy = result;
+      this.isDisabled = result;
     });
   }
 

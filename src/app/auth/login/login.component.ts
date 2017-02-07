@@ -4,6 +4,7 @@ import {WfUser} from "../../common/models/user.model";
 import {WfAuthService} from "../services/auth.service";
 import {WfNotificationService} from "../../core/services/notification.service";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
+import {SPINNER} from "../../common/services/spinner.service";
 
 @Component({
   moduleId: module.id,
@@ -13,6 +14,7 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 })
 export class WfLoginComponent implements OnInit {
   loginForm: FormGroup;
+  spinnerIndex: number = SPINNER.LOGIN;
 
   constructor(private router: Router,
               private wfAuthService: WfAuthService,

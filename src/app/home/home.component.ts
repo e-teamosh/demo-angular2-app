@@ -4,6 +4,7 @@ import {WfCityService} from "../common/services/city.service";
 import {WfCity} from "../common/models/city.model";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {Subject, Observable} from "rxjs";
+import {SPINNER} from "../common/services/spinner.service";
 
 @Component({
   moduleId: module.id,
@@ -15,6 +16,7 @@ export class WfHomeComponent implements OnInit {
   countries: string[];
   cities: Observable<WfCity[]>;
   cityForm: FormGroup;
+  spinnerIndex: number = SPINNER.GLOBAL;
 
   private searchCityStream = new Subject<string>();
 

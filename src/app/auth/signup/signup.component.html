@@ -17,7 +17,7 @@
       </div>
       <div class="col-xs-6 text-right">
         <wf-async-button [type]="'submit'" [color]="'primary'" [title]="'Join'" [isDisabled]="signupForm.invalid"
-                         (buttonClick)="join($event)"></wf-async-button>
+                         [spinnerIndex]="spinnerIndex" (buttonClick)="join($event)"></wf-async-button>
       </div>
     </div>
   </form>

@@ -10,6 +10,7 @@ import {WfDialogService} from "../../core/dialog/services/dialog.service";
 import {WfNotificationService} from "../../core/services/notification.service";
 import {CanComponentDeactivate} from "../../common/services/can-deactivate-guard.service";
 import {Observable} from "rxjs";
+import {SPINNER} from "../../common/services/spinner.service";
 
 @Component({
   moduleId: module.id,
@@ -21,6 +22,7 @@ export class WfSignupComponent implements OnInit, CanDeactivate<CanComponentDeac
   signupForm: FormGroup;
   formSubmitted: boolean;
   validationErrors: WfCustomValidationErrors;
+  spinnerIndex = SPINNER.SIGNUP;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,

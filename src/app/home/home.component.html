@@ -14,7 +14,7 @@
         </div>
         <div class="col-sm-4 text-right">
           <wf-async-button [type]="'submit'" [color]="'primary'" [title]="'Get Weather Forecast'" [isDisabled]="cityForm.invalid"
-                           (buttonClick)="getWeatherForecast($event)"></wf-async-button>
+                           [spinnerIndex]="spinnerIndex" (buttonClick)="getWeatherForecast($event)"></wf-async-button>
         </div>
       </div>
 

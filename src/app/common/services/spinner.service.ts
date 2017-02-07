@@ -3,6 +3,7 @@ import {Subject} from "rxjs";
 import * as _ from "lodash";
 
 export enum SPINNER {
+  GLOBAL,
   LOGIN,
   LOGOUT,
   SIGNUP,

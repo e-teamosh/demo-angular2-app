@@ -6,7 +6,7 @@
     <div class="text-ellipsis header-logged-user">Hi, <strong>{{loggedUser.getUserName()}}</strong></div>
     <div class="button-group">
       <wf-async-button [type]="'button'" [color]="'accent'" [title]="'Logout'"
-                       (buttonClick)="logout($event)"></wf-async-button>
+                       [spinnerIndex]="spinnerIndex" (buttonClick)="logout($event)"></wf-async-button>
     </div>
   </div>
 </md-toolbar>
