@@ -22,10 +22,13 @@ export class WfToolbarComponent implements OnInit {
     this.loggedUser = this.wfUsersService.getLoggedUser();
   }
 
-  logout(): void {
-    this.wfAuthService.logout();
-    this.router.navigate(['./login']);
-    console.log("Logout");
+  logout(event: Event): void {
+    event.preventDefault();
+    this.wfAuthService.logout()
+      .then(result => {
+        this.router.navigate(['./login']);
+        console.log("Logout");
+      });
   }
 
   get isAuthorized(): boolean {

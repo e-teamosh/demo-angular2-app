@@ -2,7 +2,6 @@ import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {MaterialModule} from "@angular/material";
 import {WfAsyncButtonComponent} from "./async-button/async-button.component";
-import {WfSpinnerService} from "./async-button/services/spinner.service";
 
 @NgModule({
   imports: [
@@ -11,7 +10,7 @@ import {WfSpinnerService} from "./async-button/services/spinner.service";
   ],
   exports: [WfAsyncButtonComponent],
   declarations: [WfAsyncButtonComponent],
-  providers: [WfSpinnerService],
+  providers: [],
 })
 export class WfFormControlsModule {
 }

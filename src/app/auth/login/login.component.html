@@ -9,9 +9,9 @@
     </md-card-content>
     <div class="row">
       <div class="col-xs-6">
-        <a [routerLink]="['/signup']">Click here to Signup</a>
+        <a md-button [routerLink]="['/signup']">Click here to Signup</a>
       </div>
-      <div class="col-xs-6">
+      <div class="col-xs-6 text-right">
         <wf-async-button [type]="'submit'" [color]="'primary'" [title]="'Login'" [isDisabled]="loginForm.invalid"
                          (buttonClick)="login($event)"></wf-async-button>
       </div>

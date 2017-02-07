@@ -5,6 +5,7 @@
 
 md-input, md-select {
   width: 100%;
+  margin-bottom: 5px;
 }
 
 [md-raised-button] {
@@ -13,4 +14,18 @@ md-input, md-select {
 
 .form-error {
   color: md-color($md-red, 400);
+}
+
+a {
+  color: md-color($md-blue, 700) !important;
+
+  &:hover {
+    text-decoration: none !important;
+  }
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

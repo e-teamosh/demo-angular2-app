@@ -3,6 +3,6 @@
           [type]="type"
           [disabled]="isDisabled"
           (click)="onClick($event)">{{title}}</button>
-  <md-spinner class="async-spinner" *ngIf="isBusy"></md-spinner>
+  <md-spinner class="async-spinner" *ngIf="isBusy" ngClass="{{'md-' + color}}"></md-spinner>
 </div>
 

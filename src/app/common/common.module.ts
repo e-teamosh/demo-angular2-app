@@ -8,6 +8,7 @@ import {WfCanDeactivateGuardService} from "./services/can-deactivate-guard.servi
 import {WfCityService} from "./services/city.service";
 import {WfUsersService} from "./services/users.service";
 import {WfFormControlsModule} from "./form-controls/form-controls.module";
+import {WfSpinnerService} from "./services/spinner.service";
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import {WfFormControlsModule} from "./form-controls/form-controls.module";
     WfAuthGuardService,
     WfCanDeactivateGuardService,
     WfCityService,
-    WfUsersService
+    WfUsersService,
+    WfSpinnerService
   ]
 })
 export class WfCommonModule {
