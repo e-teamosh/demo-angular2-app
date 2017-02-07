@@ -66,7 +66,7 @@ export class WfHomeComponent implements OnInit {
       .debounceTime(750)
       .distinctUntilChanged()
       .switchMap((value: string) => {
-        if (_.isEmpty(value)) {
+        if (_.isEmpty(value) || value.length < 3) {
           this.clearSelectedCity();
           return Promise.resolve([]);
         }

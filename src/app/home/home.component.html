@@ -17,17 +17,15 @@
                            (buttonClick)="getWeatherForecast($event)"></wf-async-button>
         </div>
       </div>
-    </md-card>
-    <br>
 
-    <md-card>
-      <md-list>
+      <md-list class="row">
         <md-radio-group formControlName="cityId">
-          <md-list-item *ngFor="let city of cities | async">
+          <md-list-item class="col-sm-4" *ngFor="let city of cities | async">
             <md-radio-button [value]="city.getId()">{{city.getName()}}</md-radio-button>
           </md-list-item>
         </md-radio-group>
       </md-list>
     </md-card>
+
   </form>
 </main>
