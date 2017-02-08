@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
-import {WfSpinnerService} from "../../services/spinner.service";
+import {WfSpinnerService, SPINNER} from "../../services/spinner.service";
 
 @Component({
   moduleId: module.id,
@@ -8,11 +8,11 @@ import {WfSpinnerService} from "../../services/spinner.service";
   styleUrls: ['./async-button.component.scss']
 })
 export class WfAsyncButtonComponent implements OnInit {
-  @Input() isDisabled: boolean = false;
-  @Input() color: string = 'primary';
+  @Input() isDisabled?: boolean = false;
+  @Input() color?: string = 'primary';
   @Input() title: string = 'No title';
-  @Input() type: string = 'button';
-  @Input() spinnerIndex: number = 0;
+  @Input() type?: string = 'button';
+  @Input() spinnerIndex?: number = SPINNER.GLOBAL;
 
   @Output() buttonClick = new EventEmitter();
 
