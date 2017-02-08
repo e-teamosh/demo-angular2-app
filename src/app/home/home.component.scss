@@ -2,3 +2,8 @@
   margin: 20px auto;
   max-width: 960px;
 }
+
+.city-list {
+  max-height: 200px;
+  overflow: auto;
+}

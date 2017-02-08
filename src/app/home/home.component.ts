@@ -4,7 +4,8 @@ import {WfCityService} from "../common/services/city.service";
 import {WfCity} from "../common/models/city.model";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {Subject, Observable} from "rxjs";
-import {SPINNER} from "../common/services/spinner.service";
+import {SPINNER, WfSpinnerService} from "../common/services/spinner.service";
+import {WfCoord} from "../common/models/coord.model";
 
 @Component({
   moduleId: module.id,
@@ -15,13 +16,16 @@ import {SPINNER} from "../common/services/spinner.service";
 export class WfHomeComponent implements OnInit {
   countries: string[];
   cities: Observable<WfCity[]>;
+  sizeCities: number = 0;
   cityForm: FormGroup;
   spinnerIndex: number = SPINNER.GLOBAL;
+  isSearchBusy: boolean;
 
   private searchCityStream = new Subject<string>();
 
   constructor(private wfCityService: WfCityService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private wfSpinnerService: WfSpinnerService) {
 
     this.wfCityService.getAllCityListFromJson()
       .then(result => this.wfCityService.getCountriesFromCityList())
@@ -30,13 +34,16 @@ export class WfHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.wfSpinnerService.spinner[SPINNER.SEARCH].subscribe(value => this.isSearchBusy = value);
+
     this.cityForm = this.formBuilder.group({
       country: ['', Validators.required],
-      city: ['', Validators.required],
-      cityId: [null]
+      cityQuery: [''],
+      cityId: [null, Validators.required]
     });
 
     this.registerSubscriberForCityValue();
+    this.registerSubscriberForCityIdValue();
   }
 
   getWeatherForecast(event: Event): void {
@@ -44,9 +51,7 @@ export class WfHomeComponent implements OnInit {
     this.clearSelectedCity();
     console.log('Submit form');
     let cityId = this.cityForm.get('cityId').value;
-    if (!_.isNull(cityId)) {
-      console.log('WfCity ID is: ' + cityId);
-    }
+
     this.cityForm.reset();
 
     // this.http.get('weather?q=London')
@@ -59,24 +64,48 @@ export class WfHomeComponent implements OnInit {
     return !_.isEmpty(this.cityForm.get('country').value);
   }
 
+  get isCityNotFound(): boolean {
+    return !this.isSearchBusy && this.sizeCities === 0 && this.cityForm.get('cityQuery').value.length > 3;
+  }
+
   private registerSubscriberForCityValue(): void {
-    this.cityForm.get('city').valueChanges.subscribe(value => {
+    this.cityForm.get('cityQuery').valueChanges.subscribe(value => {
       this.searchCityStream.next(value);
     });
 
     this.cities = this.searchCityStream
-      .debounceTime(750)
+      .debounceTime(500)
       .distinctUntilChanged()
       .switchMap((value: string) => {
         if (_.isEmpty(value) || value.length < 3) {
           this.clearSelectedCity();
           return Promise.resolve([]);
         }
-        return this.wfCityService.getCityListByQuery(value, this.cityForm.get('country').value);
+
+        return this.wfCityService.getCityListByQuery(_.startCase(value), this.cityForm.get('country').value)
+          .then(result => {
+            this.sizeCities = _.size(result);
+            return result;
+          });
       });
   }
 
   private clearSelectedCity(): void {
     this.cityForm.get('cityId').setValue(null);
+    this.sizeCities = 0;
+  }
+
+  private registerSubscriberForCityIdValue(): void {
+    this.cityForm.get('cityId').valueChanges.subscribe(value => {
+      console.log('City ID is: ' + value);
+      this.wfCityService.getCityById(value)
+        .then(result => this.getGoogleMapForCity(result));
+    });
+  }
+
+  private getGoogleMapForCity(city: WfCity): void {
+    if (!_.isEmpty(city)) {
+      console.dir(city.getCoord())
+    }
   }
 }
