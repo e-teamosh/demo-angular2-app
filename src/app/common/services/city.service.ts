@@ -37,12 +37,14 @@ export class WfCityService {
   getCityListByQuery(query: string, country: string): Promise<WfCity[]> {
     this.wfSpinnerService.showSpinner(SPINNER.SEARCH);
     return new Promise(resolve => {
-      let cityListByCountry = this.getCityListByCountry(country);
-      let foundCityList = _.filter(cityListByCountry, (cityItem) => {
-        return _.includes(cityItem.getName(), query);
-      });
-      this.wfSpinnerService.hideSpinner(SPINNER.SEARCH);
-      return resolve(foundCityList);
+      setTimeout(() => {
+        let cityListByCountry = this.getCityListByCountry(country);
+        let foundCityList = _.filter(cityListByCountry, (cityItem) => {
+          return _.includes(cityItem.getName(), query);
+        });
+        this.wfSpinnerService.hideSpinner(SPINNER.SEARCH);
+        return resolve(foundCityList);
+      }, 1000);
     });
   }
 
