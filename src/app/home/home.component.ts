@@ -67,7 +67,7 @@ export class WfHomeComponent implements OnInit {
   }
 
   get isCityNotFound(): boolean {
-    return !this.isSearchBusy && this.sizeCities === 0 && this.cityForm.get('cityQuery').value.length > 3;
+    return !this.isSearchBusy && this.sizeCities === 0 && this.cityForm.get('cityQuery').value.length >= 3;
   }
 
   private registerSubscriberForCityValue(): void {
