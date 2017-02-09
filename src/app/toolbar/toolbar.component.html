@@ -1,12 +1,14 @@
 <md-toolbar color="primary">
   <div class="media-body media-middle">
+    <button md-icon-button class="mobile" *ngIf="isAuthorized" (click)="sideNav.open()">
+      <md-icon>dehaze</md-icon>
+    </button>
     <strong>Weather Forecast</strong>
   </div>
-  <div *ngIf="isAuthorized" class="media-body media-middle text-right">
-    <div class="text-ellipsis header-logged-user">Hi, <strong>{{loggedUser.getUserName()}}</strong></div>
+  <div *ngIf="isAuthorized" class="header-logged-user-wrapper media-body media-middle text-right">
+    <wf-logged-user-name></wf-logged-user-name>
     <div class="button-group">
-      <wf-async-button [type]="'button'" [color]="'accent'" [title]="'Logout'"
-                       [spinnerIndex]="spinnerIndex" (buttonClick)="logout($event)"></wf-async-button>
+      <wf-logout-button [sideNav]="sideNav"></wf-logout-button>
     </div>
   </div>
 </md-toolbar>

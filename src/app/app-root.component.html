@@ -1,6 +1,15 @@
-<wf-toolbar></wf-toolbar>
+<md-sidenav-container>
 
-<div class="app-content-wrapper">
-  <router-outlet></router-outlet>
-</div>
+  <md-sidenav #sidenav mode="over">
+    <wf-logged-user-name></wf-logged-user-name>
+    <hr>
+    <wf-logout-button [sideNav]="sidenav"></wf-logout-button>
+  </md-sidenav>
 
+  <wf-toolbar [sideNav]="sidenav"></wf-toolbar>
+
+  <div class="app-content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
+
+</md-sidenav-container>

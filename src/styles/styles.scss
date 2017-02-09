@@ -2,9 +2,13 @@
 @import './theme/app-theme.scss';
 @import './common.scss';
 
+html {
+  height: 100%;
+}
+
 body {
-  font-family: Roboto, sans-serif;
-  background-color: md-color($md-teal, 50) !important;
+  font-family: Roboto, sans-serif !important;
+  height: 100%;
 }
 
 .app-content-wrapper {
