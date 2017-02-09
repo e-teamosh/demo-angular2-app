@@ -5,7 +5,7 @@ import {WfCity} from "../common/models/city.model";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {Subject, Observable} from "rxjs";
 import {SPINNER, WfSpinnerService} from "../common/services/spinner.service";
-import {WfCoord} from "../common/models/coord.model";
+import {WfGoogleMapsService} from "../common/services/google-maps.service";
 
 @Component({
   moduleId: module.id,
@@ -20,12 +20,14 @@ export class WfHomeComponent implements OnInit {
   cityForm: FormGroup;
   spinnerIndex: number = SPINNER.GLOBAL;
   isSearchBusy: boolean;
+  cityStaticMapUrl: string;
 
   private searchCityStream = new Subject<string>();
 
   constructor(private wfCityService: WfCityService,
               private formBuilder: FormBuilder,
-              private wfSpinnerService: WfSpinnerService) {
+              private wfSpinnerService: WfSpinnerService,
+              private wfGoogleMapsService: WfGoogleMapsService) {
 
     this.wfCityService.getAllCityListFromJson()
       .then(result => this.wfCityService.getCountriesFromCityList())
@@ -93,6 +95,7 @@ export class WfHomeComponent implements OnInit {
   private clearSelectedCity(): void {
     this.cityForm.get('cityId').setValue(null);
     this.sizeCities = null;
+    this.cityStaticMapUrl = '';
   }
 
   private registerSubscriberForCityIdValue(): void {
@@ -105,7 +108,7 @@ export class WfHomeComponent implements OnInit {
 
   private getGoogleMapForCity(city: WfCity): void {
     if (!_.isEmpty(city)) {
-      console.dir(city.getCoord())
+      this.cityStaticMapUrl = this.wfGoogleMapsService.getStaticMapUrl(city.getCoord());
     }
   }
 }

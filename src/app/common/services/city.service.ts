@@ -1,26 +1,23 @@
 import {Injectable} from "@angular/core";
 import * as _ from "lodash";
 import {WfCity} from "../models/city.model";
-import {Http} from "@angular/http";
 import {WfSpinnerService, SPINNER} from "./spinner.service";
+import {WfHttpService} from "../../core/http-client/services/http.service";
+import {API} from "../../core/http-client/api-def";
 
 @Injectable()
 export class WfCityService {
   private allCityList: WfCity[];
   private foundCityList: WfCity[];
 
-  constructor(private http: Http,
+  constructor(private http: WfHttpService,
               private wfSpinnerService: WfSpinnerService) {
     this.allCityList = [];
   }
 
   getAllCityListFromJson(): Promise<WfCity[]>{
-    return this.http.get('./assets/city-list/city.list.us.json')
-      .toPromise()
-      .then(res => {
-        let cities = res.json();
-        return this.defineCityList(cities);
-      })
+    return this.http.request(API.get.cityList())
+      .then(res => this.defineCityList(res))
       .catch(error => {
         console.log(error);
         return error;

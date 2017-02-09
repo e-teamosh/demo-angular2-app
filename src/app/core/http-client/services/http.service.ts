@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http, Response} from "@angular/http";
+import {Http, Response, Request} from "@angular/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
 
@@ -9,8 +9,8 @@ export class WfHttpService {
   constructor(private http: Http) {
   }
 
-  get(url: string): Promise<any> {
-    return this.http.get(this.getFullUrl(url))
+  request(request: Request): Promise<any> {
+    return this.http.request(request)
       .toPromise()
       .then(this.extractData)
       .catch(this.handleError);

@@ -31,4 +31,9 @@
     </md-card>
 
   </form>
+
+  <md-card *ngIf="cityStaticMapUrl">
+    <img [src]="cityStaticMapUrl" alt="City Location">
+  </md-card>
+
 </main>
