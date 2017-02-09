@@ -7,6 +7,7 @@ import {WfSpinnerService, SPINNER} from "./spinner.service";
 @Injectable()
 export class WfCityService {
   private allCityList: WfCity[];
+  private foundCityList: WfCity[];
 
   constructor(private http: Http,
               private wfSpinnerService: WfSpinnerService) {
@@ -40,17 +41,17 @@ export class WfCityService {
       // TODO: remove this
       setTimeout(() => {
         let cityListByCountry = this.getCityListByCountry(country);
-        let foundCityList = _.filter(cityListByCountry, (cityItem) => {
+        this.foundCityList = _.filter(cityListByCountry, (cityItem) => {
           return _.includes(cityItem.getName(), query);
         });
         this.wfSpinnerService.hideSpinner(SPINNER.SEARCH);
-        return resolve(foundCityList);
+        return resolve(this.foundCityList);
       }, 1000);
     });
   }
 
   getCityById(cityId: number): Promise<WfCity> {
-    return new Promise(resolve => resolve(_.find(this.allCityList, (city) => city.getId() === cityId)));
+    return new Promise(resolve => resolve(_.find(this.foundCityList, (city) => city.getId() === cityId)));
   }
 
   private defineCityList(cities: Object): WfCity[] {

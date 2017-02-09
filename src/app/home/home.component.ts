@@ -16,7 +16,7 @@ import {WfCoord} from "../common/models/coord.model";
 export class WfHomeComponent implements OnInit {
   countries: string[];
   cities: Observable<WfCity[]>;
-  sizeCities: number = 0;
+  sizeCities: number;
   cityForm: FormGroup;
   spinnerIndex: number = SPINNER.GLOBAL;
   isSearchBusy: boolean;
@@ -92,7 +92,7 @@ export class WfHomeComponent implements OnInit {
 
   private clearSelectedCity(): void {
     this.cityForm.get('cityId').setValue(null);
-    this.sizeCities = 0;
+    this.sizeCities = null;
   }
 
   private registerSubscriberForCityIdValue(): void {
