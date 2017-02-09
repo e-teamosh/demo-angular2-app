@@ -1,5 +1,5 @@
 export class WfStorageKeys {
-  readonly loggedUser = 'logged-user';
+  readonly loggedUser: string = 'logged-user';
 }
 
 export const USER_NAME_MAX_LENGTH = 25;
@@ -21,6 +21,6 @@ export class WfCustomValidationErrors {
 }
 
 export class WfUnitsFormat {
-  readonly Fahrenheit: 'imperial';
-  readonly Celsius: 'metric';
+  readonly fahrenheit: string = 'imperial';
+  readonly celsius: string = 'metric';
 }

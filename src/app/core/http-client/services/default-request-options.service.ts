@@ -13,7 +13,8 @@ export class WfDefaultRequestOptionsService extends BaseRequestOptions {
     // Set the default query params
     this.search = new URLSearchParams();
     this.search.set('appid', environment.apiKey);
-    this.search.set('units', new WfUnitsFormat().Fahrenheit);
+    let units = new WfUnitsFormat();
+    this.search.set('units', units.fahrenheit);
   }
 }
 
