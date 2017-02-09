@@ -1,5 +1,5 @@
 .choose-city {
-  margin: 20px auto;
+  margin: 20px auto 0;
   max-width: 960px;
 }
 
@@ -7,4 +7,15 @@
   max-height: 200px;
   overflow: auto;
   margin-top: 10px;
+}
+
+.city-map-wrapper {
+  margin: 10px auto;
+  max-width: 700px;
+
+  .city-map {
+    height: 100%;
+    width: 100%;
+    max-width: 640px;
+  }
 }

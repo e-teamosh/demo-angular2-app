@@ -6,10 +6,14 @@ import {environment} from "../../../environments/environment";
 @Injectable()
 export class WfGoogleMapsService {
   getStaticMapUrl(coord: WfCoord): string {
+    let aspectRatio = 1.33;
+    let screenWidth = screen.width;
+    let mapWidth = screenWidth < 640 ? screenWidth : 640;
+    let mapHeight = Math.round(mapWidth / aspectRatio);
     let searchParams = new URLSearchParams();
     searchParams.set('key', environment.googleApiKey);
     searchParams.set('zoom', '14');
-    searchParams.set('size', '640x480');
+    searchParams.set('size', [mapWidth, mapHeight].join('x'));
     searchParams.set('markers', [coord.getLatitude(), coord.getLongitude()].join(','));
 
     let request = new Request({
