@@ -10,7 +10,7 @@ import {WfDialogService} from "../../core/dialog/services/dialog.service";
 import {WfNotificationService} from "../../core/services/notification.service";
 import {CanComponentDeactivate} from "../../common/services/can-deactivate-guard.service";
 import {Observable} from "rxjs";
-import {SPINNER} from "../../common/services/spinner.service";
+import {SPINNER, WfSpinnerService} from "../../common/services/spinner.service";
 
 @Component({
   moduleId: module.id,
@@ -29,7 +29,8 @@ export class WfSignupComponent implements OnInit, CanDeactivate<CanComponentDeac
               private wfAuthService: WfAuthService,
               private wfDialogService: WfDialogService,
               private wfNotificationService: WfNotificationService,
-              private viewContainerRef: ViewContainerRef) {
+              private viewContainerRef: ViewContainerRef,
+              private wfSpinnerService: WfSpinnerService) {
   }
 
   ngOnInit(): void {
@@ -38,11 +39,7 @@ export class WfSignupComponent implements OnInit, CanDeactivate<CanComponentDeac
       password: ['', Validators.compose([Validators.required, equalPassword('confirmPassword')])],
       confirmPassword: ['', Validators.compose([Validators.required, equalPassword('password')])]
     });
-
     this.validationErrors = new WfCustomValidationErrors();
-    // this.validationErrors.passwordMismatch = CONSTANTS.customValidationErrors.passwordMismatch.message;
-    // this.validationErrors.userNameMaxLength = CONSTANTS.customValidationErrors.userNameMaxLength.message;
-
     this.formSubmitted = false;
   }
 
@@ -57,14 +54,19 @@ export class WfSignupComponent implements OnInit, CanDeactivate<CanComponentDeac
 
   join(event: Event): void {
     event.preventDefault();
+    this.wfSpinnerService.showSpinner(this.spinnerIndex);
     this.formSubmitted = true;
     let newUser = new WfUser(this.signupForm.value.userName, this.signupForm.value.password);
     this.wfAuthService.signUp(newUser)
-      .then(result => this.router.navigate(['/home']))
+      .then(result => {
+        this.wfSpinnerService.hideSpinner(this.spinnerIndex);
+        this.router.navigate(['/home'])
+      })
       .catch(error => {
         this.formSubmitted = false;
         this.wfNotificationService.showError(error);
         this.signupForm.reset();
+        this.wfSpinnerService.hideSpinner(this.spinnerIndex);
       });
   }
 

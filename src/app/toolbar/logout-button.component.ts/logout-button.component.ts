@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {SPINNER} from "../../common/services/spinner.service";
+import {SPINNER, WfSpinnerService} from "../../common/services/spinner.service";
 import {Router} from "@angular/router";
 import {WfAuthService} from "../../auth/services/auth.service";
 
@@ -14,15 +14,18 @@ export class WfLogoutButtonComponent {
   spinnerIndex: number = SPINNER.LOGOUT;
 
   constructor(private router: Router,
-              private wfAuthService: WfAuthService) {
+              private wfAuthService: WfAuthService,
+              private wfSpinnerService: WfSpinnerService) {
   }
 
   logout(event: Event): void {
     event.preventDefault();
+    this.wfSpinnerService.showSpinner(this.spinnerIndex);
     this.wfAuthService.logout()
       .then(result => {
         this.sideNav.close();
         this.router.navigate(['./login']);
+        this.wfSpinnerService.hideSpinner(this.spinnerIndex);
         console.log("Logout");
       });
   }

@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import * as _ from "lodash";
-import {WfCity} from "../models/city.model";
-import {WfSpinnerService, SPINNER} from "./spinner.service";
+import {WfCity} from "../../common/models/city.model";
 import {WfHttpService} from "../../core/http-client/services/http.service";
 import {API} from "../../core/http-client/api-def";
 
@@ -10,8 +9,7 @@ export class WfCityService {
   private allCityList: WfCity[];
   private foundCityList: WfCity[];
 
-  constructor(private http: WfHttpService,
-              private wfSpinnerService: WfSpinnerService) {
+  constructor(private http: WfHttpService) {
     this.allCityList = [];
   }
 
@@ -33,7 +31,6 @@ export class WfCityService {
   }
 
   getCityListByQuery(query: string, country: string): Promise<WfCity[]> {
-    this.wfSpinnerService.showSpinner(SPINNER.SEARCH);
     return new Promise(resolve => {
       // TODO: remove this
       setTimeout(() => {
@@ -41,7 +38,6 @@ export class WfCityService {
         this.foundCityList = _.filter(cityListByCountry, (cityItem) => {
           return _.includes(cityItem.getName(), query);
         });
-        this.wfSpinnerService.hideSpinner(SPINNER.SEARCH);
         return resolve(this.foundCityList);
       }, 1000);
     });

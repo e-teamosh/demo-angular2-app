@@ -1,11 +1,13 @@
 import {Component, OnInit} from "@angular/core";
 import * as _ from "lodash";
-import {WfCityService} from "../common/services/city.service";
+import {WfCityService} from "./services/city.service";
 import {WfCity} from "../common/models/city.model";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {Subject, Observable} from "rxjs";
 import {SPINNER, WfSpinnerService} from "../common/services/spinner.service";
-import {WfGoogleMapsService} from "../common/services/google-maps.service";
+import {WfGoogleMapsService} from "./services/google-maps.service";
+import {WfWeatherService} from "./services/weather.service";
+import {WfNotificationService} from "../core/services/notification.service";
 
 @Component({
   moduleId: module.id,
@@ -27,7 +29,9 @@ export class WfHomeComponent implements OnInit {
   constructor(private wfCityService: WfCityService,
               private formBuilder: FormBuilder,
               private wfSpinnerService: WfSpinnerService,
-              private wfGoogleMapsService: WfGoogleMapsService) {
+              private wfGoogleMapsService: WfGoogleMapsService,
+              private wfWeatherService: WfWeatherService,
+              private wfNotificationService: WfNotificationService) {
 
     this.wfCityService.getAllCityListFromJson()
       .then(result => this.wfCityService.getCountriesFromCityList())
@@ -50,16 +54,17 @@ export class WfHomeComponent implements OnInit {
 
   getWeatherForecast(event: Event): void {
     event.preventDefault();
-    this.clearSelectedCity();
-    console.log('Submit form');
+    this.wfSpinnerService.showSpinner(this.spinnerIndex);
     let cityId = this.cityForm.get('cityId').value;
-
-    this.cityForm.reset();
-
-    // this.http.get('weather?q=London')
-    //   .then(res => console.log(res))
-    //   .catch(error => console.log(error));
-
+    this.wfWeatherService.getWeatherByCityId(cityId)
+      .then(res => {
+        console.log(res);
+        this.wfSpinnerService.hideSpinner(this.spinnerIndex);
+      })
+      .catch(error => {
+        this.wfNotificationService.showError(error);
+        this.wfSpinnerService.hideSpinner(this.spinnerIndex);
+      });
   }
 
   get isCountrySelected(): boolean {
@@ -83,10 +88,11 @@ export class WfHomeComponent implements OnInit {
           this.clearSelectedCity();
           return Promise.resolve([]);
         }
-
+        this.wfSpinnerService.showSpinner(SPINNER.SEARCH);
         return this.wfCityService.getCityListByQuery(_.startCase(value), this.cityForm.get('country').value)
           .then(result => {
             this.sizeCities = _.size(result);
+            this.wfSpinnerService.hideSpinner(SPINNER.SEARCH);
             return result;
           });
       });

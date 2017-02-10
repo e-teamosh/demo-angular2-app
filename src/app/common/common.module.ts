@@ -5,8 +5,6 @@ import {BrowserModule} from "@angular/platform-browser";
 import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {WfAuthGuardService} from "./services/auth-guard.service";
 import {WfCanDeactivateGuardService} from "./services/can-deactivate-guard.service";
-import {WfCityService} from "./services/city.service";
-import {WfGoogleMapsService} from "./services/google-maps.service";
 import {WfUsersService} from "./services/users.service";
 import {WfFormControlsModule} from "./form-controls/form-controls.module";
 import {WfSpinnerService} from "./services/spinner.service";
@@ -27,8 +25,6 @@ import {WfSpinnerService} from "./services/spinner.service";
   providers: [
     WfAuthGuardService,
     WfCanDeactivateGuardService,
-    WfCityService,
-    WfGoogleMapsService,
     WfUsersService,
     WfSpinnerService
   ]
