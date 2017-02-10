@@ -32,7 +32,6 @@ export class WfLoginComponent implements OnInit {
 
   login(event: Event): void {
     event.preventDefault();
-    let spinner = SPINNER.LOGIN;
     this.wfSpinnerService.showSpinner(this.spinnerIndex);
     let user = new WfUser();
     user.fillFromObject(this.loginForm.value);
