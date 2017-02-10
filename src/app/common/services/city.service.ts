@@ -52,6 +52,7 @@ export class WfCityService {
   }
 
   private defineCityList(cities: Object): WfCity[] {
+    this.allCityList.length = 0;
     _.forEach(cities, (cityItem => {
       let city = new WfCity();
       city.fillFromObject(cityItem);

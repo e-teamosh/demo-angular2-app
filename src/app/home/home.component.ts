@@ -100,7 +100,6 @@ export class WfHomeComponent implements OnInit {
 
   private registerSubscriberForCityIdValue(): void {
     this.cityForm.get('cityId').valueChanges.subscribe(value => {
-      console.log('City ID is: ' + value);
       this.wfCityService.getCityById(value)
         .then(result => this.getGoogleMapForCity(result));
     });
