@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-import {WfUser} from "../../common/models/user.model";
+import {WfUser} from "../../common/models/user/user.model";
 import {WfAuthService} from "../services/auth.service";
 import {WfNotificationService} from "../../core/services/notification.service";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";

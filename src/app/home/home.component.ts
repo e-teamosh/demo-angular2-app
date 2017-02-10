@@ -1,13 +1,14 @@
 import {Component, OnInit} from "@angular/core";
 import * as _ from "lodash";
 import {WfCityService} from "./services/city.service";
-import {WfCity} from "../common/models/city.model";
+import {WfCity} from "../common/models/weather/city.model";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {Subject, Observable} from "rxjs";
 import {SPINNER, WfSpinnerService} from "../common/services/spinner.service";
 import {WfGoogleMapsService} from "./services/google-maps.service";
 import {WfWeatherService} from "./services/weather.service";
 import {WfNotificationService} from "../core/services/notification.service";
+import {WfWeather} from "../common/models/weather/weather.model";
 
 @Component({
   moduleId: module.id,
@@ -23,6 +24,7 @@ export class WfHomeComponent implements OnInit {
   spinnerIndex: number = SPINNER.GLOBAL;
   isSearchBusy: boolean;
   cityStaticMapUrl: string;
+  currentWeatherForecast: WfWeather;
 
   private searchCityStream = new Subject<string>();
 
@@ -57,8 +59,9 @@ export class WfHomeComponent implements OnInit {
     this.wfSpinnerService.showSpinner(this.spinnerIndex);
     let cityId = this.cityForm.get('cityId').value;
     this.wfWeatherService.getWeatherByCityId(cityId)
-      .then(res => {
-        console.log(res);
+      .then(result => {
+        this.currentWeatherForecast = result;
+        console.log('Weather Obj:', this.currentWeatherForecast);
         this.wfSpinnerService.hideSpinner(this.spinnerIndex);
       })
       .catch(error => {

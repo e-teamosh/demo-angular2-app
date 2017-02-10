@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import * as _ from "lodash";
-import {WfCity} from "../../common/models/city.model";
+import {WfCity} from "../../common/models/weather/city.model";
 import {WfHttpService} from "../../core/http-client/services/http.service";
 import {API} from "../../core/http-client/api-def";
 

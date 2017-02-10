@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import * as _ from "lodash";
 import {WfStorageKeys} from "../constants";
-import {WfLoggedUser} from "../models/logged-user.model";
-import {WfUser} from "../models/user.model";
+import {WfLoggedUser} from "../models/user/logged-user.model";
+import {WfUser} from "../models/user/user.model";
 import {WfStorageService} from "../../core/services/storage.service";
 
 @Injectable()

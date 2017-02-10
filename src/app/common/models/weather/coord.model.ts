@@ -1,3 +1,8 @@
+/**
+ *  coord
+ *    coord.lon - City geo location, longitude
+ *    coord.lat - City geo location, latitude
+ */
 export class WfCoord {
   constructor(private lon: number = 0,
               private lat: number = 0) {}

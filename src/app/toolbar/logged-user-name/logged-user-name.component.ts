@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {WfLoggedUser} from "../../common/models/logged-user.model";
+import {WfLoggedUser} from "../../common/models/user/logged-user.model";
 import {WfUsersService} from "../../common/services/users.service";
 
 @Component({

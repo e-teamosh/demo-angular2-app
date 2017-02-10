@@ -1,5 +1,12 @@
 import {WfCoord} from "./coord.model";
 
+/**
+ *  city
+ *    city._id - City ID
+ *    city.name - City name
+ *    city.country - Country code (GB, JP etc.)
+ *    city.coord - Coordinates
+ */
 export class WfCity {
   constructor(private _id: number = 0,
               private name: string = '',

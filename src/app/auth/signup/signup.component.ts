@@ -2,7 +2,7 @@ import {Component, OnInit, ViewContainerRef} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router, CanDeactivate} from "@angular/router";
 import * as _ from "lodash";
-import {WfUser} from "../../common/models/user.model";
+import {WfUser} from "../../common/models/user/user.model";
 import {equalPassword, isPasswordMismatchError} from "../../common/validators/equalPassword.validator";
 import {USER_NAME_MAX_LENGTH, WfCustomValidationErrors} from "../../common/constants";
 import {WfAuthService} from "../services/auth.service";
