@@ -23,13 +23,16 @@ export class WfWeatherComponent implements OnInit {
 
   ngOnInit() {
     this.wfSpinnerService.showSpinner(this.spinnerIndex);
+    let cityId = +this.route.snapshot.params['cityId'];
+    let weatherPromise = this.wfWeatherService.getWeatherByCityId(cityId);
+    let forecastPromise = this.wfWeatherService.getForecastByCityId(cityId);
     //TODO: remove timeout wrapper
     setTimeout(() => {
-      let cityId = +this.route.snapshot.params['cityId'];
-      this.wfWeatherService.getWeatherByCityId(cityId)
+      Promise.all([weatherPromise, forecastPromise])
         .then(result => {
-          this.currentWeatherForecast = result;
+          this.currentWeatherForecast = result[0];
           console.log('Weather Obj:', this.currentWeatherForecast);
+          console.log('Forecast JSON:', result[1]);
           this.wfSpinnerService.hideSpinner(this.spinnerIndex);
         })
         .catch(error => {

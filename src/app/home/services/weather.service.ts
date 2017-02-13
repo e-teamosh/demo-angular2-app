@@ -5,19 +5,24 @@ import {WfWeather} from "../../common/models/weather/weather.model";
 
 @Injectable()
 export class WfWeatherService {
-  currentWeatherForecast: WfWeather;
-
   constructor(private http: WfHttpService) {
   }
 
   getWeatherByCityId(cityId: number): Promise<WfWeather> {
     return this.http.request(API.get.weatherByCityId(cityId))
       .then(result => {
-        this.currentWeatherForecast = new WfWeather();
-        this.currentWeatherForecast.fillFromObject(result);
-        return this.currentWeatherForecast;
+        let weather = new WfWeather();
+        weather.fillFromObject(result);
+        return weather;
       })
       .catch(error => error);
   }
 
+  getForecastByCityId(cityId: number): Promise<any> {
+    return this.http.request(API.get.forecastByCityId(cityId))
+      .then(result => {
+        return result;
+      })
+      .catch(error => error);
+  }
 }

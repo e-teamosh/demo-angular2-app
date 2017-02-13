@@ -26,6 +26,15 @@ export const API = {
         url: makeFullWeatherApiUrl(url),
         search: searchParams
       }))
+    },
+    forecastByCityId: (cityId: number) => {
+      let url = 'forecast';
+      let searchParams = new URLSearchParams(defaultWeatherSearchParams);
+      searchParams.set('id', cityId.toString());
+      return new Request(optionsGET.merge({
+        url: makeFullWeatherApiUrl(url),
+        search: searchParams
+      }))
     }
   }
 };
