@@ -4,7 +4,7 @@ import {WfUser} from "../../common/models/user/user.model";
 import {WfAuthService} from "../services/auth.service";
 import {WfNotificationService} from "../../core/services/notification.service";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {SPINNER, WfSpinnerService} from "../../common/services/spinner.service";
+import {SPINNER, WfSpinnerService} from "../../common/spinner-controls/services/spinner.service";
 
 @Component({
   moduleId: module.id,

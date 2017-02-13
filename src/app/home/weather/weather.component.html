@@ -1,0 +1,11 @@
+<md-card *ngIf="currentWeatherForecast" class="basic-card">
+  <md-card-title>
+    {{currentWeatherForecast.getName()}}, {{currentWeatherForecast.getWeatherSys().getCountry()}}
+  </md-card-title>
+  <md-card-content>
+
+  </md-card-content>
+  <md-card-actions>
+    <a md-button [routerLink]="['/home']">Choose other city</a>
+  </md-card-actions>
+</md-card>

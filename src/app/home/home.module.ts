@@ -5,10 +5,12 @@ import {WfCommonModule} from "../common/common.module";
 import {WfCityService} from "./services/city.service";
 import {WfGoogleMapsService} from "./services/google-maps.service";
 import {WfWeatherService} from "./services/weather.service";
+import {WfWeatherComponent} from "./weather/weather.component";
 
 @NgModule({
   declarations: [
-    WfHomeComponent
+    WfHomeComponent,
+    WfWeatherComponent
   ],
   imports: [
     WfCommonModule,
@@ -19,7 +21,10 @@ import {WfWeatherService} from "./services/weather.service";
     WfGoogleMapsService,
     WfWeatherService
   ],
-  exports: [WfHomeComponent],
+  exports: [
+    WfHomeComponent,
+    WfWeatherComponent
+  ],
   entryComponents: [WfHomeComponent]
 })
 export class WfHomeModule {

@@ -13,7 +13,7 @@ export class WfAuthService {
 
   authenticateUser(user: WfUser): Promise<WfUser> {
     return new Promise((resolve, reject) => {
-      //TODO: remove timeout
+      //TODO: remove timeout wrapper
       setTimeout(() => {
         const USERS = this.wfUsersService.getUsers();
         if (_.find(USERS, storedUser => user.getUserName() === storedUser.getUserName() && user.getPassword() === storedUser.getPassword())) {
@@ -46,7 +46,7 @@ export class WfAuthService {
 
   logout(): Promise<boolean> {
     return new Promise(resolve => {
-      //TODO: remove timeout
+      //TODO: remove timeout wrapper
       setTimeout(() => {
         this.wfStorageService.clear();
         this.wfUsersService.clearLoggedUser();

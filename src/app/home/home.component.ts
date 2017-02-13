@@ -4,11 +4,13 @@ import {WfCityService} from "./services/city.service";
 import {WfCity} from "../common/models/weather/city.model";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {Subject, Observable} from "rxjs";
-import {SPINNER, WfSpinnerService} from "../common/services/spinner.service";
+import {SPINNER, WfSpinnerService} from "../common/spinner-controls/services/spinner.service";
 import {WfGoogleMapsService} from "./services/google-maps.service";
 import {WfWeatherService} from "./services/weather.service";
 import {WfNotificationService} from "../core/services/notification.service";
 import {WfWeather} from "../common/models/weather/weather.model";
+import {WfHomeRoutingModule} from "./home-routing.module";
+import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -21,10 +23,9 @@ export class WfHomeComponent implements OnInit {
   cities: Observable<WfCity[]>;
   sizeCities: number;
   cityForm: FormGroup;
-  spinnerIndex: number = SPINNER.GLOBAL;
+  // spinnerIndex: number = SPINNER.GLOBAL;
   isSearchBusy: boolean;
   cityStaticMapUrl: string;
-  currentWeatherForecast: WfWeather;
 
   private searchCityStream = new Subject<string>();
 
@@ -32,8 +33,7 @@ export class WfHomeComponent implements OnInit {
               private formBuilder: FormBuilder,
               private wfSpinnerService: WfSpinnerService,
               private wfGoogleMapsService: WfGoogleMapsService,
-              private wfWeatherService: WfWeatherService,
-              private wfNotificationService: WfNotificationService) {
+              private router: Router) {
 
     this.wfCityService.getAllCityListFromJson()
       .then(result => this.wfCityService.getCountriesFromCityList())
@@ -56,18 +56,8 @@ export class WfHomeComponent implements OnInit {
 
   getWeatherForecast(event: Event): void {
     event.preventDefault();
-    this.wfSpinnerService.showSpinner(this.spinnerIndex);
     let cityId = this.cityForm.get('cityId').value;
-    this.wfWeatherService.getWeatherByCityId(cityId)
-      .then(result => {
-        this.currentWeatherForecast = result;
-        console.log('Weather Obj:', this.currentWeatherForecast);
-        this.wfSpinnerService.hideSpinner(this.spinnerIndex);
-      })
-      .catch(error => {
-        this.wfNotificationService.showError(error);
-        this.wfSpinnerService.hideSpinner(this.spinnerIndex);
-      });
+    this.router.navigate(['/home/weather', cityId]);
   }
 
   get isCountrySelected(): boolean {

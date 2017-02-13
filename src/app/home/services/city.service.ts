@@ -32,7 +32,7 @@ export class WfCityService {
 
   getCityListByQuery(query: string, country: string): Promise<WfCity[]> {
     return new Promise(resolve => {
-      // TODO: remove this
+      // TODO: remove timeout wrapper
       setTimeout(() => {
         let cityListByCountry = this.getCityListByCountry(country);
         this.foundCityList = _.filter(cityListByCountry, (cityItem) => {

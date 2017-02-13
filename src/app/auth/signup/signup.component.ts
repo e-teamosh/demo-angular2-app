@@ -10,7 +10,7 @@ import {WfDialogService} from "../../core/dialog/services/dialog.service";
 import {WfNotificationService} from "../../core/services/notification.service";
 import {CanComponentDeactivate} from "../../common/services/can-deactivate-guard.service";
 import {Observable} from "rxjs";
-import {SPINNER, WfSpinnerService} from "../../common/services/spinner.service";
+import {SPINNER, WfSpinnerService} from "../../common/spinner-controls/services/spinner.service";
 
 @Component({
   moduleId: module.id,

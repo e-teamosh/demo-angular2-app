@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
-import {WfSpinnerService, SPINNER} from "../../services/spinner.service";
+import {WfSpinnerService, SPINNER} from "../services/spinner.service";
 
 @Component({
   moduleId: module.id,

@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {SPINNER, WfSpinnerService} from "../../common/services/spinner.service";
+import {SPINNER, WfSpinnerService} from "../../common/spinner-controls/services/spinner.service";
 import {Router} from "@angular/router";
 import {WfAuthService} from "../../auth/services/auth.service";
 

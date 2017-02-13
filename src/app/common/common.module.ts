@@ -6,8 +6,7 @@ import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {WfAuthGuardService} from "./services/auth-guard.service";
 import {WfCanDeactivateGuardService} from "./services/can-deactivate-guard.service";
 import {WfUsersService} from "./services/users.service";
-import {WfFormControlsModule} from "./form-controls/form-controls.module";
-import {WfSpinnerService} from "./services/spinner.service";
+import {WfSpinnerControlsModule} from "./spinner-controls/spinner-controls.module";
 
 @NgModule({
   imports: [
@@ -19,14 +18,13 @@ import {WfSpinnerService} from "./services/spinner.service";
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    WfFormControlsModule
+    WfSpinnerControlsModule
   ],
   declarations: [],
   providers: [
     WfAuthGuardService,
     WfCanDeactivateGuardService,
-    WfUsersService,
-    WfSpinnerService
+    WfUsersService
   ]
 })
 export class WfCommonModule {

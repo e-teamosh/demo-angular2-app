@@ -43,7 +43,7 @@ export class WfUsersService {
 
   addUser(newUser: WfUser): Promise<WfUser> {
     return new Promise((resolve, reject) => {
-      // TODO: remove timeout
+      // TODO: remove timeout wrapper
       setTimeout(() => {
         let foundUser = _.find(this.users, user => user.getUserName() === newUser.getUserName());
         if (_.isEmpty(foundUser)) {
