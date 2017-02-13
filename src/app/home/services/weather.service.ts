@@ -10,10 +10,9 @@ export class WfWeatherService {
   constructor(private http: WfHttpService) {
   }
 
-  getWeatherByCityId(cityId: number): Promise<any> {
+  getWeatherByCityId(cityId: number): Promise<WfWeather> {
     return this.http.request(API.get.weatherByCityId(cityId))
       .then(result => {
-        console.log('JSON:', result);
         this.currentWeatherForecast = new WfWeather();
         this.currentWeatherForecast.fillFromObject(result);
         return this.currentWeatherForecast;
