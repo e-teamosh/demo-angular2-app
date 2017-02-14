@@ -13,7 +13,14 @@ export class WfCityService {
     this.allCityList = [];
   }
 
-  getAllCityListFromJson(): Promise<WfCity[]>{
+  getAllCity(): Promise<WfCity[]> {
+    if (_.isEmpty(this.allCityList)) {
+      return this.getAllCityListFromJson();
+    }
+    return Promise.resolve(this.allCityList);
+  }
+
+  getAllCityListFromJson(): Promise<WfCity[]> {
     return this.http.request(API.get.cityList())
       .then(res => this.defineCityList(res))
       .catch(error => {

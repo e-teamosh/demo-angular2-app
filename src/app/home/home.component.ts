@@ -6,10 +6,6 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {Subject, Observable} from "rxjs";
 import {SPINNER, WfSpinnerService} from "../common/spinner-controls/services/spinner.service";
 import {WfGoogleMapsService} from "./services/google-maps.service";
-import {WfWeatherService} from "./services/weather.service";
-import {WfNotificationService} from "../core/services/notification.service";
-import {WfWeather} from "../common/models/weather/weather.model";
-import {WfHomeRoutingModule} from "./home-routing.module";
 import {Router} from "@angular/router";
 
 @Component({
@@ -23,7 +19,6 @@ export class WfHomeComponent implements OnInit {
   cities: Observable<WfCity[]>;
   sizeCities: number;
   cityForm: FormGroup;
-  // spinnerIndex: number = SPINNER.GLOBAL;
   isSearchBusy: boolean;
   cityStaticMapUrl: string;
 
@@ -35,7 +30,7 @@ export class WfHomeComponent implements OnInit {
               private wfGoogleMapsService: WfGoogleMapsService,
               private router: Router) {
 
-    this.wfCityService.getAllCityListFromJson()
+    this.wfCityService.getAllCity()
       .then(result => this.wfCityService.getCountriesFromCityList())
       .then(result => this.countries = result);
 
