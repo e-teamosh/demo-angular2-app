@@ -14,6 +14,7 @@
  *                    Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
  *    main.sea_level - Atmospheric pressure on the sea level, hPa
  *    main.grnd_level - Atmospheric pressure on the ground level, hPa
+ *    main.temp_kf Internal parameter
  */
 export class WfTemperature {
   constructor(private temp: number = 0,
@@ -22,7 +23,8 @@ export class WfTemperature {
               private temp_min: number = 0,
               private temp_max: number = 0,
               private sea_level: number = 0,
-              private grnd_level: number = 0) {
+              private grnd_level: number = 0,
+              private temp_kf: number = 0) {
   }
 
   setTemp(temp: number): void {
@@ -79,6 +81,14 @@ export class WfTemperature {
 
   getGrndLevel(): number {
     return this.grnd_level;
+  }
+
+  setTempKf(tempKf: number): void {
+    this.temp_kf = tempKf;
+  }
+
+  getTempKf(): number {
+    return this.temp_kf;
   }
 
   fillFromObject(main: WfTemperature): void {

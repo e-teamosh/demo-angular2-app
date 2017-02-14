@@ -4,6 +4,7 @@ import {WfWeatherService} from "../services/weather.service";
 import {WfWeather} from "../../common/models/weather/weather.model";
 import {WfNotificationService} from "../../core/services/notification.service";
 import {WfSpinnerService, SPINNER} from "../../common/spinner-controls/services/spinner.service";
+import {WfForecast} from "../../common/models/weather/forecast.model";
 
 @Component({
   moduleId: module.id,
@@ -13,7 +14,8 @@ import {WfSpinnerService, SPINNER} from "../../common/spinner-controls/services/
 })
 export class WfWeatherComponent implements OnInit {
   spinnerIndex = SPINNER.GLOBAL;
-  currentWeatherForecast: WfWeather;
+  weather: WfWeather;
+  forecast: WfForecast;
 
   constructor(private route: ActivatedRoute,
               private wfWeatherService: WfWeatherService,
@@ -30,9 +32,16 @@ export class WfWeatherComponent implements OnInit {
     setTimeout(() => {
       Promise.all([weatherPromise, forecastPromise])
         .then(result => {
-          this.currentWeatherForecast = result[0];
-          console.log('Weather Obj:', this.currentWeatherForecast);
-          console.log('Forecast JSON:', result[1]);
+          if (result[0] instanceof WfWeather) {
+            console.log('GOOD-0');
+          }
+          this.weather = result[0];
+          if (result[1] instanceof WfForecast) {
+            console.log('GOOD-1');
+          }
+          this.forecast = result[1];
+          console.log('Weather Obj:', this.weather);
+          console.log('Forecast Obj:', this.forecast);
           this.wfSpinnerService.hideSpinner(this.spinnerIndex);
         })
         .catch(error => {

@@ -8,7 +8,7 @@ import {WfWeatherSys} from "./weather-sys.model";
  *  coord - Coordinates
  *  weather - (more info Weather condition codes)
  *  base - Internal parameter
- *  main - Temperature
+ *  main - Temperature, pressure, humidity
  *  wind - Wind
  *  clouds - Cloudiness
  *  dt - Time of data calculation, unix, UTC
@@ -20,7 +20,7 @@ import {WfWeatherSys} from "./weather-sys.model";
  */
 export class WfWeather {
   constructor(private coord: WfCoord = new WfCoord(),
-              private weather: any[] = [],
+              private weather: WfWeatherCondition[] = [],
               private base: string = '',
               private main: WfTemperature = new WfTemperature(),
               private wind: WfWind = new WfWind(),
