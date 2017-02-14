@@ -36,11 +36,26 @@
     5 day / 3 hour forecast
   </md-card-title>
   <md-card-content>
-    <md-list>
-      <md-list-item *ngFor="let item of forecast.getForecast() | mapToIterable">
-        <h4>{{item.key}}</h4>
-      </md-list-item>
-    </md-list>
-
+    <md-tab-group>
+      <md-tab *ngFor="let item of forecast.getForecast() | mapToIterable" [label]="item.key">
+        <md-list>
+          <md-list-item *ngFor="let forecast of item.val">
+            <dl class="dl-horizontal">
+              <dt>{{forecast.getUTCDate().getStringUTCHours() + ':' + forecast.getUTCDate().getStringUTCMinutes()}}</dt>
+              <dd>
+                <dl class="dl-horizontal">
+                  <dt>
+                    Clouds:
+                  </dt>
+                  <dd>
+                    {{forecast.getClouds().getCloudiness()}} %
+                  </dd>
+                </dl>
+              </dd>
+            </dl>
+          </md-list-item>
+        </md-list>
+      </md-tab>
+    </md-tab-group>
   </md-card-content>
 </md-card>
