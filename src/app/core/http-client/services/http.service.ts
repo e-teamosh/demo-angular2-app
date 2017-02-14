@@ -1,23 +1,29 @@
 import {Injectable} from "@angular/core";
 import {Http, Response, Request} from "@angular/http";
 import {Observable} from "rxjs";
-import {environment} from "../../../../environments/environment";
+import {SPINNER, WfSpinnerService} from "../../../common/spinner-controls/services/spinner.service";
 
 @Injectable()
 export class WfHttpService {
+  spinnerIndex = SPINNER.GLOBAL;
 
-  constructor(private http: Http) {
+  constructor(private http: Http,
+              private wfSpinnerService: WfSpinnerService) {
   }
 
   request(request: Request): Promise<any> {
+    this.wfSpinnerService.showSpinner(this.spinnerIndex);
     return this.http.request(request)
+      .timeout(1000) //TODO: remove timeout
       .toPromise()
-      .then(this.extractData)
-      .catch(this.handleError);
-  }
-
-  private getFullUrl(url: string): string {
-    return environment.apiUrl + url;
+      .then(result => {
+        this.wfSpinnerService.hideSpinner(this.spinnerIndex);
+        return this.extractData(result);
+      })
+      .catch(error => {
+        this.wfSpinnerService.hideSpinner(this.spinnerIndex);
+        return this.handleError(error);
+      });
   }
 
   private extractData(res: Response) {
@@ -25,7 +31,7 @@ export class WfHttpService {
     return body || {};
   }
 
-  private handleError (error: Response | any) {
+  private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';
