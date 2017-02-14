@@ -13,7 +13,8 @@ export class WfForecast {
               private message: number = 0,
               private city: WfCity = new WfCity(),
               private cnt: number = 0,
-              private list: WfListItemForecast[] = []) {
+              private list: Array<{}> = [],
+              private groupedForecast: GroupedForecast = {}) {
   }
 
   setCod(cod: string): void {
@@ -48,20 +49,12 @@ export class WfForecast {
     return this.cnt;
   }
 
-  setForecast(forecast: WfListItemForecast[]): void {
-    this.list = forecast;
+  setForecast(forecast: GroupedForecast): void {
+    this.groupedForecast = forecast;
   }
 
-  setForecastByIndex(index: number, forecast: WfListItemForecast): void {
-    this.list[index] = forecast;
-  }
-
-  getForecast(): WfListItemForecast[] {
-    return this.list;
-  }
-
-  getForecastByIndex(index: number): WfListItemForecast {
-    return this.list[index];
+  getForecast(): GroupedForecast {
+    return this.groupedForecast;
   }
 
   fillFromObject(forecastObj: WfForecast): void {
@@ -71,12 +64,35 @@ export class WfForecast {
     city.fillFromObject(forecastObj.city);
     this.setCity(city);
 
-    let forecast = new Array();
-    for(let item of forecastObj.list) {
-      let _forecast = new WfListItemForecast();
-      _forecast.fillFromObject(item);
-      forecast.push(_forecast);
-    }
+    let forecast = this.groupForecast(forecastObj.list);
+    // for(let item of forecastObj.list) {
+    //   let _forecast = new WfListItemForecast();
+    //   _forecast.fillFromObject(item);
+    //   forecast.push(_forecast);
+    // }
     this.setForecast(forecast);
   }
+
+  private groupForecast(forecastList: Array<any>): GroupedForecast {
+    let newForecastList: GroupedForecast = {};
+    for(let item of forecastList) {
+      let _itemForecast = new WfListItemForecast();
+      _itemForecast.fillFromObject(item);
+      let utcDate = _itemForecast.getUTCDate();
+      let key = [
+        utcDate.getStringUTCDay(),
+        utcDate.getStringUTCMonth(),
+        utcDate.getStringUTCYear()
+      ].join('/');
+      if (!newForecastList[key]) {
+        newForecastList[key] =  [];
+      }
+      newForecastList[key].push(_itemForecast);
+    }
+    return newForecastList;
+  }
+}
+
+interface GroupedForecast {
+  [key: string]: WfListItemForecast[]
 }

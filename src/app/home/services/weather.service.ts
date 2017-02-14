@@ -9,7 +9,7 @@ export class WfWeatherService {
   constructor(private http: WfHttpService) {
   }
 
-  getWeatherByCityId(cityId: number): Promise<any> {
+  getWeatherByCityId(cityId: number): Promise<WfWeather> {
     return this.http.request(API.get.weatherByCityId(cityId))
       .then(result => {
         let weather = new WfWeather();
@@ -19,7 +19,7 @@ export class WfWeatherService {
       .catch(error => error);
   }
 
-  getForecastByCityId(cityId: number): Promise<any> {
+  getForecastByCityId(cityId: number): Promise<WfForecast> {
     return this.http.request(API.get.forecastByCityId(cityId))
       .then(result => {
         console.log(result);

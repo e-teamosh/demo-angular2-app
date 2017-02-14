@@ -2,6 +2,7 @@ import {WfTemperature} from "./temperature.model";
 import {WfWeatherCondition} from "./weather-condition.model";
 import {WfClouds} from "./clouds.model";
 import {WfWind} from "./wind.model";
+import {WfUTCDate} from "./utc-date.model";
 /**
  *  list
  *    list.dt - Time of data forecasted, unix, UTC
@@ -17,7 +18,8 @@ export class WfListItemForecast {
               private main: WfTemperature = new WfTemperature(),
               private weather: WfWeatherCondition[] = [],
               private clouds: WfClouds = new WfClouds(),
-              private wind: WfWind = new WfWind()) {
+              private wind: WfWind = new WfWind(),
+              private utcDate: WfUTCDate = new WfUTCDate()) {
   }
 
   setTime(unixTimeStamp: number): void {
@@ -76,6 +78,14 @@ export class WfListItemForecast {
     return this.wind;
   }
 
+  setUTCDate(unixTimeStamp: number): void {
+    this.utcDate = new WfUTCDate(unixTimeStamp);
+  }
+
+  getUTCDate(): WfUTCDate {
+    return this.utcDate;
+  }
+
   fillFromObject(itemForecastObj: WfListItemForecast): void {
     Object.assign(this, itemForecastObj);
 
@@ -98,5 +108,7 @@ export class WfListItemForecast {
     let clouds = new WfClouds();
     clouds.fillFromObject(itemForecastObj.clouds);
     this.setClouds(clouds);
+
+    this.setUTCDate(this.dt);
   }
 }

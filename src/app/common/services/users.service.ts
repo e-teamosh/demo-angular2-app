@@ -25,7 +25,7 @@ export class WfUsersService {
   }
 
   getLoggedUser(): WfLoggedUser {
-    let result: any | null = this.wfStorageService.getKey(this.storageKeys.loggedUser);
+    let result: WfLoggedUser | null = this.wfStorageService.getKey(this.storageKeys.loggedUser);
     if (result instanceof Object) {
       this.loggedUser.fillFromObject(result);
     }
