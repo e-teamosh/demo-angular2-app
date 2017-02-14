@@ -7,6 +7,8 @@ import {API} from "../../core/http-client/api-def";
 @Injectable()
 export class WfCityService {
   private allCityList: WfCity[];
+  private countries: {}[];
+  private cityByCountry: WfCity[];
   private foundCityList: WfCity[];
 
   constructor(private http: WfHttpService) {
@@ -30,10 +32,24 @@ export class WfCityService {
   }
 
   getCountriesFromCityList(): Promise<string[]> {
-    return new Promise(resolve => resolve(_.uniq(_.map(this.allCityList, 'country'))));
+    return new Promise(resolve => {
+      if (_.isEmpty(this.countries)) {
+        let countries = _.map(this.allCityList, 'country');
+        let uniqueCountries = _.uniq(countries);
+        this.countries = _.orderBy(uniqueCountries, [], true);
+        return resolve(this.countries);
+      }
+      return resolve(this.countries);
+    });
   }
 
   getCityListByCountry(country: string): WfCity[] {
+    if (!_.isEmpty(this.cityByCountry)) {
+      let foundCityByCountry = _.find(this.cityByCountry, city => city.getCountry() === country);
+      if (foundCityByCountry) {
+        return this.cityByCountry;
+      }
+    }
     return _.filter(this.allCityList, (cityItem) => cityItem.getCountry() === country);
   }
 
