@@ -2,6 +2,7 @@ import {Component, Input} from "@angular/core";
 import {SPINNER, WfSpinnerService} from "../../common/spinner-controls/services/spinner.service";
 import {Router} from "@angular/router";
 import {WfAuthService} from "../../auth/services/auth.service";
+import {MdSidenav} from "@angular/material";
 
 @Component({
   moduleId: module.id,
@@ -10,7 +11,7 @@ import {WfAuthService} from "../../auth/services/auth.service";
   styleUrls: ['./logout-button.component.scss']
 })
 export class WfLogoutButtonComponent {
-  @Input() sideNav: any;
+  @Input() sideNav: MdSidenav;
   spinnerIndex: number = SPINNER.LOGOUT;
 
   constructor(private router: Router,

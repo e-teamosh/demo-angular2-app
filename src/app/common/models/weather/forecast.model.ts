@@ -13,7 +13,7 @@ export class WfForecast {
               private message: number = 0,
               private city: WfCity = new WfCity(),
               private cnt: number = 0,
-              private list: Array<{}> = [],
+              private list: Array<WfListItemForecast> = [],
               private groupedForecast: GroupedForecast = {}) {
   }
 
@@ -65,15 +65,10 @@ export class WfForecast {
     this.setCity(city);
 
     let forecast = this.groupForecast(forecastObj.list);
-    // for(let item of forecastObj.list) {
-    //   let _forecast = new WfListItemForecast();
-    //   _forecast.fillFromObject(item);
-    //   forecast.push(_forecast);
-    // }
     this.setForecast(forecast);
   }
 
-  private groupForecast(forecastList: Array<any>): GroupedForecast {
+  private groupForecast(forecastList: Array<WfListItemForecast>): GroupedForecast {
     let newForecastList: GroupedForecast = {};
     for(let item of forecastList) {
       let _itemForecast = new WfListItemForecast();

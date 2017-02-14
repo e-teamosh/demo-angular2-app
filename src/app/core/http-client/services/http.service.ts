@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {Http, Response, Request} from "@angular/http";
 import {Observable} from "rxjs";
 import {SPINNER, WfSpinnerService} from "../../../common/spinner-controls/services/spinner.service";
+import {ErrorObservable} from "rxjs/observable/ErrorObservable";
 
 @Injectable()
 export class WfHttpService {

@@ -1,5 +1,6 @@
 import {Component, Input} from "@angular/core";
 import {WfAuthService} from "../auth/services/auth.service";
+import {MdSidenav} from "@angular/material";
 
 @Component({
   moduleId: module.id,
@@ -8,7 +9,7 @@ import {WfAuthService} from "../auth/services/auth.service";
   styleUrls: ['./toolbar.component.scss']
 })
 export class WfToolbarComponent {
-  @Input() sideNav: any;
+  @Input() sideNav: MdSidenav;
 
   constructor(private wfAuthService: WfAuthService) {
   }
