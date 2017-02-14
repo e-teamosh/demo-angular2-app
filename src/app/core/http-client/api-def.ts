@@ -16,7 +16,7 @@ function makeFullWeatherApiUrl(url: string): string {
 export const API = {
   get: {
     cityList: () => new Request(optionsGET.merge({
-      url: './assets/city-list/city.list.json'
+      url: './assets/city-list/city.list.us.json'
     })),
     weatherByCityId: (cityId: number) => {
       let url = 'weather';

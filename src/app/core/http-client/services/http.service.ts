@@ -1,8 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http, Response, Request} from "@angular/http";
-import {Observable} from "rxjs";
 import {SPINNER, WfSpinnerService} from "../../../common/spinner-controls/services/spinner.service";
-import {ErrorObservable} from "rxjs/observable/ErrorObservable";
 
 @Injectable()
 export class WfHttpService {
@@ -32,7 +30,7 @@ export class WfHttpService {
     return body || {};
   }
 
-  private handleError(error: Response | any) {
+  private handleError(error: Response | Error) {
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';
@@ -42,6 +40,6 @@ export class WfHttpService {
       errMsg = error.message ? error.message : error.toString();
     }
     console.error(errMsg);
-    return Observable.throw(errMsg);
+    throw new Error(errMsg);
   }
 }
