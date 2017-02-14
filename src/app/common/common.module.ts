@@ -7,6 +7,7 @@ import {WfAuthGuardService} from "./services/auth-guard.service";
 import {WfCanDeactivateGuardService} from "./services/can-deactivate-guard.service";
 import {WfUsersService} from "./services/users.service";
 import {WfSpinnerControlsModule} from "./spinner-controls/spinner-controls.module";
+import {PipesModule} from "./pipes/pipes.module";
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import {WfSpinnerControlsModule} from "./spinner-controls/spinner-controls.modul
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    WfSpinnerControlsModule
+    WfSpinnerControlsModule,
+    PipesModule
   ],
   declarations: [],
   providers: [
