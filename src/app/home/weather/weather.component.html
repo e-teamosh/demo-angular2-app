@@ -10,8 +10,6 @@
       <dd>{{weather.getWeatherByIndex(0).getMain()}} ({{weather.getWeatherByIndex(0).getDescription()}})</dd>
       <dt>Clouds:</dt>
       <dd>{{weather.getClouds().getCloudiness()}} %</dd>
-      <dt>Visibility:</dt>
-      <dd>{{weather.getVisibility()}} meters</dd>
       <dt>Temperature:</dt>
       <dd>{{weather.getMain().getTemp()}} &deg;F</dd>
       <dt>Pressure:</dt>
@@ -38,23 +36,25 @@
   <md-card-content>
     <md-tab-group>
       <md-tab *ngFor="let item of forecast.getForecast() | mapToIterable" [label]="item.key">
-        <md-list>
-          <md-list-item *ngFor="let forecast of item.val">
+        <md-tab-group>
+          <md-tab *ngFor="let forecast of item.val"
+                  [label]="forecast.getUTCDate().getStringUTCHours() + ':' + forecast.getUTCDate().getStringUTCMinutes()">
             <dl class="dl-horizontal">
-              <dt>{{forecast.getUTCDate().getStringUTCHours() + ':' + forecast.getUTCDate().getStringUTCMinutes()}}</dt>
-              <dd>
-                <dl class="dl-horizontal">
-                  <dt>
-                    Clouds:
-                  </dt>
-                  <dd>
-                    {{forecast.getClouds().getCloudiness()}} %
-                  </dd>
-                </dl>
-              </dd>
+              <dt></dt>
+              <dd>{{forecast.getWeatherByIndex(0).getMain()}} ({{forecast.getWeatherByIndex(0).getDescription()}})</dd>
+              <dt>Clouds:</dt>
+              <dd>{{forecast.getClouds().getCloudiness()}} %</dd>
+              <dt>Temperature:</dt>
+              <dd>{{forecast.getMain().getTemp()}} &deg;F</dd>
+              <dt>Pressure:</dt>
+              <dd>{{forecast.getMain().getPressure()}} hPa</dd>
+              <dt>Humidity:</dt>
+              <dd>{{forecast.getMain().getHumidity()}} %</dd>
+              <dt>Wind:</dt>
+              <dd>{{forecast.getWind().getSpeed()}} miles/hour ({{forecast.getWind().getDegree()}} degrees (meteorological))</dd>
             </dl>
-          </md-list-item>
-        </md-list>
+          </md-tab>
+        </md-tab-group>
       </md-tab>
     </md-tab-group>
   </md-card-content>
