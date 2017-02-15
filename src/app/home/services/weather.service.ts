@@ -22,7 +22,6 @@ export class WfWeatherService {
   getForecastByCityId(cityId: number): Promise<WfForecast> {
     return this.http.request(API.get.forecastByCityId(cityId))
       .then(result => {
-        console.log(result);
         let forecast = new WfForecast();
         forecast.fillFromObject(result);
         return forecast;

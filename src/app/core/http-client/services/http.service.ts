@@ -40,6 +40,6 @@ export class WfHttpService {
       errMsg = error.message ? error.message : error.toString();
     }
     console.error(errMsg);
-    throw new Error(errMsg);
+    return new Error(errMsg);
   }
 }

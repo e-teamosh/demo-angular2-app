@@ -6,18 +6,7 @@
     <dl class="dl-horizontal">
       <dt>Last update:</dt>
       <dd>{{weather.getTime() * 1000 | date: 'dd/MM/y h:mm a Z'}}</dd>
-      <dt></dt>
-      <dd>{{weather.getWeatherByIndex(0).getMain()}} ({{weather.getWeatherByIndex(0).getDescription()}})</dd>
-      <dt>Clouds:</dt>
-      <dd>{{weather.getClouds().getCloudiness()}} %</dd>
-      <dt>Temperature:</dt>
-      <dd>{{weather.getMain().getTemp()}} &deg;F</dd>
-      <dt>Pressure:</dt>
-      <dd>{{weather.getMain().getPressure()}} hPa</dd>
-      <dt>Humidity:</dt>
-      <dd>{{weather.getMain().getHumidity()}} %</dd>
-      <dt>Wind:</dt>
-      <dd>{{weather.getWind().getSpeed()}} miles/hour ({{weather.getWind().getDegree()}} degrees (meteorological))</dd>
+      <wf-main-weather-info [weather]="weather"></wf-main-weather-info>
       <dt>Sunrise:</dt>
       <dd>{{weather.getWeatherSys().getSunRise() * 1000 | date: 'h:mm a Z'}}</dd>
       <dt>Sunset:</dt>
@@ -39,20 +28,7 @@
         <md-tab-group>
           <md-tab *ngFor="let forecast of item.val"
                   [label]="forecast.getUTCDate().getStringUTCHours() + ':' + forecast.getUTCDate().getStringUTCMinutes()">
-            <dl class="dl-horizontal">
-              <dt></dt>
-              <dd>{{forecast.getWeatherByIndex(0).getMain()}} ({{forecast.getWeatherByIndex(0).getDescription()}})</dd>
-              <dt>Clouds:</dt>
-              <dd>{{forecast.getClouds().getCloudiness()}} %</dd>
-              <dt>Temperature:</dt>
-              <dd>{{forecast.getMain().getTemp()}} &deg;F</dd>
-              <dt>Pressure:</dt>
-              <dd>{{forecast.getMain().getPressure()}} hPa</dd>
-              <dt>Humidity:</dt>
-              <dd>{{forecast.getMain().getHumidity()}} %</dd>
-              <dt>Wind:</dt>
-              <dd>{{forecast.getWind().getSpeed()}} miles/hour ({{forecast.getWind().getDegree()}} degrees (meteorological))</dd>
-            </dl>
+            <wf-main-weather-info [weather]="forecast"></wf-main-weather-info>
           </md-tab>
         </md-tab-group>
       </md-tab>

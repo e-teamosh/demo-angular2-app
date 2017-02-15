@@ -29,7 +29,6 @@ export class WfWeatherComponent implements OnInit {
       .then((result) => {
         this.weather = result[0];
         this.forecast = result[1];
-        console.log('Forecast Obj:', this.forecast);
       })
       .catch(error => {
         this.wfNotificationService.showError(error);

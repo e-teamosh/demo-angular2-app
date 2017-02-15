@@ -1,0 +1,14 @@
+<dl class="dl-horizontal">
+  <dt></dt>
+  <dd>{{weather.getWeatherByIndex(0).getMain()}} ({{weather.getWeatherByIndex(0).getDescription()}})</dd>
+  <dt>Clouds:</dt>
+  <dd>{{weather.getClouds().getCloudiness()}} %</dd>
+  <dt>Temperature:</dt>
+  <dd>{{weather.getMain().getTemp()}} &deg;F</dd>
+  <dt>Pressure:</dt>
+  <dd>{{weather.getMain().getPressure()}} hPa</dd>
+  <dt>Humidity:</dt>
+  <dd>{{weather.getMain().getHumidity()}} %</dd>
+  <dt>Wind:</dt>
+  <dd>{{weather.getWind().getSpeed()}} miles/hour ({{weather.getWind().getDegree()}} degrees (meteorological))</dd>
+</dl>
