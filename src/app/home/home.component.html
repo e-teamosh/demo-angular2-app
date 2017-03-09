@@ -1,34 +1,45 @@
 <main>
-  <form role="form" name="cityForm" [formGroup]="cityForm" (ngSubmit)="getWeatherForecast($event)">
-    <md-card class="basic-card">
-      <div class="row">
-        <div class="col-sm-4">
-          <md-select placeholder="Country" formControlName="country">
-            <md-option *ngFor="let country of countries" [value]="country">
-              {{country}}
-            </md-option>
-          </md-select>
-        </div>
-        <div class="col-sm-4">
-          <md-input placeholder="Search City" formControlName="cityQuery" *ngIf="isCountrySelected"></md-input>
-        </div>
-        <div class="col-sm-4 text-right">
-          <button md-raised-button type="submit" color="primary" [disabled]="cityForm.invalid">Get Weather Forecast</button>
-        </div>
-      </div>
+  <md-card class="basic-card">
+    <md-tab-group>
 
-      <md-progress-bar mode="query" *ngIf="isSearchBusy"></md-progress-bar>
+      <md-tab label="City name">
+        <form role="form" name="cityForm" [formGroup]="cityForm" (ngSubmit)="getWeatherForecast($event)">
+          <div class="row">
+            <div class="col-sm-4">
+              <md-select placeholder="Country" formControlName="country">
+                <md-option *ngFor="let country of countries" [value]="country">
+                  {{country}}
+                </md-option>
+              </md-select>
+            </div>
+            <div class="col-sm-4">
+              <md-input placeholder="Search City" formControlName="cityQuery" *ngIf="isCountrySelected"></md-input>
+            </div>
+            <div class="col-sm-4 text-right">
+              <button md-raised-button type="submit" color="primary" [disabled]="cityForm.invalid">Get Weather Forecast</button>
+            </div>
+          </div>
 
-      <md-list class="row city-list">
-        <md-radio-group formControlName="cityId">
-          <p *ngIf="isCityNotFound" class="text-center">City not found. Try again.</p>
-          <md-list-item class="col-sm-4" *ngFor="let city of cities | async">
-            <md-radio-button [value]="city.getId()">{{city.getName()}}</md-radio-button>
-          </md-list-item>
-        </md-radio-group>
-      </md-list>
-    </md-card>
-  </form>
+          <md-progress-bar mode="query" *ngIf="isSearchBusy"></md-progress-bar>
+
+          <md-list class="row city-list">
+            <md-radio-group formControlName="cityId">
+              <p *ngIf="isCityNotFound" class="text-center">City not found. Try again.</p>
+              <md-list-item class="col-sm-4" *ngFor="let city of cities | async">
+                <md-radio-button [value]="city.getId()">{{city.getName()}}</md-radio-button>
+              </md-list-item>
+            </md-radio-group>
+          </md-list>
+        </form>
+      </md-tab>
+
+      <md-tab label="Map">
+        <md-card-title>Choose your city location</md-card-title>
+      </md-tab>
+
+    </md-tab-group>
+
+  </md-card>
 
   <md-card *ngIf="cityStaticMapUrl" class="city-map-wrapper text-center">
     <md-card-title>Location</md-card-title>
