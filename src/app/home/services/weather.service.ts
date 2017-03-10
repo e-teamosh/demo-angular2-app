@@ -28,4 +28,14 @@ export class WfWeatherService {
       })
       .catch(error => error);
   }
+
+  getWeatherByCityCoordinates(lat: number, lon: number): Promise<WfWeather> {
+    return this.http.request(API.get.weatherByCityCoordinates(lat, lon))
+      .then(result => {
+        let weather = new WfWeather();
+        weather.fillFromObject(result);
+        return weather;
+      })
+      .catch(error => error);
+  }
 }

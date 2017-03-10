@@ -35,6 +35,16 @@ export const API = {
         url: makeFullWeatherApiUrl(url),
         search: searchParams
       }))
+    },
+    weatherByCityCoordinates: (lat: number, lon: number) => {
+      let url = 'weather';
+      let searchParams = new URLSearchParams(defaultWeatherSearchParams);
+      searchParams.set('lat', lat.toString());
+      searchParams.set('lon', lon.toString());
+      return new Request(optionsGET.merge({
+        url: makeFullWeatherApiUrl(url),
+        search: searchParams
+      }))
     }
   }
 };
