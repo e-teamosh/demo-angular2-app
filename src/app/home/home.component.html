@@ -31,6 +31,11 @@
             </md-radio-group>
           </md-list>
         </form>
+
+        <div *ngIf="cityStaticMapUrl" class="city-map-wrapper text-center">
+          <md-card-title>Location</md-card-title>
+          <img class="city-map" [src]="cityStaticMapUrl" alt="City Location">
+        </div>
       </md-tab>
 
       <md-tab label="Map">
@@ -41,9 +46,6 @@
 
   </md-card>
 
-  <md-card *ngIf="cityStaticMapUrl" class="city-map-wrapper text-center">
-    <md-card-title>Location</md-card-title>
-    <img class="city-map" [src]="cityStaticMapUrl" alt="City Location">
-  </md-card>
+
 
 </main>
